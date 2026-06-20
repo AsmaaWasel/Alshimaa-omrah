@@ -1,7 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle, Phone, Mail, MapPin, Clock } from "lucide-react";
+
+import { MessageCircle, Phone, Clock, MapPin } from "lucide-react";
+
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 
 export default function Contact() {
   const contactMethods = [
@@ -144,6 +147,44 @@ export default function Contact() {
               اتصل بنا
             </a>
           </div>
+          <h4 className="text-xl font-bold text-[#2F2A25] mt-10 mb-5">
+            تابعنا على منصات التواصل
+          </h4>
+          <div className="mt-8 flex justify-center items-center gap-5">
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/qafila_alsyhmaa_likedemati_mut"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center hover:scale-110 transition-all duration-300"
+            >
+              <FaInstagram className="w-7 h-7 text-[#C58A2A]" />
+            </a>
+
+            {/* TikTok */}
+            <a
+              href="https://www.tiktok.com/@alshimaa_makah?_r=1&_t=ZS-97L5QAYAryS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center hover:scale-110 transition-all duration-300"
+            >
+              <FaTiktok className="w-6 h-6 text-[#C58A2A]" />
+            </a>
+
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com/share/1BgfTwUvr2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center hover:scale-110 transition-all duration-300"
+            >
+              <FaFacebookF className="w-6 h-6 text-[#C58A2A]" />
+            </a>
+          </div>
+
+          <p className="mt-4 text-center text-sm text-muted-foreground">
+            تابعوا قافلة الشيماء على منصات التواصل الاجتماعي
+          </p>
         </motion.div>
 
         {/* Footer Info */}
