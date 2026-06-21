@@ -55,7 +55,7 @@ export default function BusesPage() {
 
         <div className="text-center mb-20">
           <h1 className="text-5xl font-bold text-[#2F2A25] mb-6">
-            باصات قافلة الروضة
+            باصات قافلة الشيماء{" "}
           </h1>
 
           <p className="text-gray-600 text-lg max-w-3xl mx-auto leading-8">
