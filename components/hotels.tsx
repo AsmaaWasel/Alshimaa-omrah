@@ -1,180 +1,281 @@
+
 "use client";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Star, MapPin, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 
-export default function Hotels() {
-  const hotelTypes = [
+export default function PremiumServices() {
+  const hotels = [
     {
-      id: 1,
-      title: "فنادق 3 نجوم",
-      image: "/park-room-5stars.jpeg",
-      stars: 3,
+      name: "فندق فوكو ",
       description:
-        "إقامة مريحة واقتصادية للمعتمرين مع خدمات أساسية وموقع مناسب.",
+        "إقامة فاخرة وخدمات راقية في موقع مميز لتوفير أقصى درجات الراحة للمعتمرين والزوار.",
+      images: [
+        "/voco/i-love-voco.jpeg",
+        "/voco/voco-gate.jpeg",
+        "/voco/room2.jpeg",
+        "/voco/room3.jpeg",
+        "/voco/room4.jpeg",
+        "/voco/reception-voco.jpeg",
+
+      ],
+      video: "/voco/voco-video.mp4",
       features: [
-        "غرف نظيفة ومريحة",
-        "خدمة استقبال",
-        "أسعار اقتصادية",
-        "مواصلات للحرم",
+        "فندق خمس نجوم",
+        "غرف فاخرة",
+        "خدمات متكاملة",
+        "راحة واستجمام",
       ],
     },
     {
-      id: 2,
-      title: "فنادق 5 نجوم",
-      image: "/voco-reception-5stars.jpeg",
-      stars: 5,
-      description: "إقامة فاخرة وخدمات مميزة للباحثين عن أعلى مستويات الراحة.",
+      name: "فندق ميلينيوم ",
+      description:
+        "تجربة إقامة مميزة تجمع بين الفخامة والراحة مع خدمات عالية الجودة لضيوف الرحمن.",
+      images: [
+        "/melemum/melemum-gate.jpeg",
+        "/melemum/melemum-gate2.jpeg",
+        "/melemum/melemum-room.jpeg",
+        "/melemum/melemum-room2.jpeg",
+        "/melemum/melemum-room3.jpeg",
+        "/melemum/melemum-room4.jpeg",
+        
+      ],
+      video: "/melemum/video.mp4",
       features: [
-        "غرف وأجنحة فاخرة",
-        "مطاعم راقية",
-        "خدمات متميزة",
-        "راحة استثنائية",
+        "فندق خمس نجوم",
+        "خدمة متميزة",
+        "غرف حديثة",
+        "مرافق متكاملة",
       ],
     },
   ];
 
-  const locations = [
-    {
-      id: 1,
-      title: "شارع إبراهيم الخليل",
-      description:
-        "من أشهر المناطق القريبة من الحرم المكي وتتميز بسهولة الوصول وتوفر العديد من الفنادق والخدمات.",
-    },
-    {
-      id: 2,
-      title: "محبس الجن",
-      description:
-        "منطقة مميزة تضم العديد من الفنادق المناسبة للمعتمرين مع وسائل نقل مستمرة إلى الحرم.",
-    },
+  const vipBusImages = [
+    "/vip-buses/bus1.jpeg",
+    "/vip-buses/bus2.jpeg",
+    "/vip-buses/bus3.jpeg",
+    "/vip-buses/bus4.jpeg",
+    "/vip-buses/bus5.jpeg",
   ];
+
+  const vipBusVideos = [
+  "/vip-buses/video1.mp4",
+  "/vip-buses/video3.mp4",
+];
 
   return (
-    <section id="hotels" className="py-24 bg-white">
+    <section className="py-24 bg-[#FAF7F3]">
       <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
+        {/* Hotels Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
-          <span className="text-[#8B6B4A] font-semibold">الإقامة والفنادق</span>
+          <span className="text-[#8B6B4A] font-semibold">
+            الإقامة الفاخرة
+          </span>
 
           <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-[#2F2A25]">
-            خيارات الإقامة
+            فنادق الخمس نجوم
           </h2>
 
-          <p className="max-w-3xl mx-auto text-lg text-gray-600">
-            نوفر خيارات إقامة متنوعة تناسب جميع الاحتياجات والميزانيات.
+          <p className="max-w-3xl mx-auto text-gray-600 leading-8">
+            نوفر لضيوفنا إقامة مميزة في فنادق مختارة بعناية لضمان الراحة
+            والخصوصية أثناء رحلة العمرة.
           </p>
         </motion.div>
 
-        {/* Hotel Types */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-24">
-          {hotelTypes.map((hotel, index) => (
+        {/* Hotels */}
+        <div className="space-y-16">
+          {hotels.map((hotel, index) => (
             <motion.div
-              key={hotel.id}
+              key={hotel.name}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.2,
-              }}
-              className="bg-[#FAF7F3] rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition-all"
+              className="bg-white rounded-[32px] shadow-xl overflow-hidden"
             >
-              <div className="relative h-[300px]">
-                <Image
-                  src={hotel.image}
-                  alt={hotel.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="p-8">
-                <div className="flex gap-1 mb-4">
-                  {[...Array(hotel.stars)].map((_, idx) => (
-                    <Star
-                      key={idx}
-                      className="w-5 h-5 fill-[#D9B45B] text-[#D9B45B]"
-                    />
-                  ))}
-                </div>
-
-                <h3 className="text-3xl font-bold text-[#2F2A25] mb-4">
-                  {hotel.title}
-                </h3>
-
-                <p className="text-gray-600 leading-7 mb-6">
-                  {hotel.description}
-                </p>
-
-                <div className="space-y-3 mb-8">
-                  {hotel.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-[#8B6B4A]" />
-                      <span>{feature}</span>
+              <div
+                className={`grid lg:grid-cols-2 ${
+                  index % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                {/* Images */}
+                <div className="grid grid-cols-2 gap-2 p-2">
+                  {hotel.images.map((img, i) => (
+                    <div
+                      key={i}
+                      className="relative h-[180px] md:h-[240px]"
+                    >
+                      <Image
+                        src={img}
+                        alt={hotel.name}
+                        fill
+                        className="object-cover rounded-xl"
+                      />
                     </div>
                   ))}
                 </div>
 
-                <a
-                  href="https://wa.me/966563591198"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex px-6 py-3 rounded-full bg-[#8B6B4A] text-white font-bold hover:scale-105 transition-all"
-                >
-                  استفسر الآن
-                </a>
+                {/* Content */}
+                <div className="p-8 lg:p-12 flex flex-col justify-center">
+                  <h3 className="text-3xl font-bold text-[#2F2A25] mb-4">
+                    {hotel.name}
+                  </h3>
+
+                  <p className="text-gray-600 leading-8 mb-8">
+                    {hotel.description}
+                  </p>
+
+                  <div className="grid sm:grid-cols-2 gap-4 mb-8">
+                    {hotel.features.map((feature, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center gap-3"
+                      >
+                        <CheckCircle className="w-5 h-5 text-[#8B6B4A]" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="overflow-hidden rounded-2xl">
+                    <video
+                      controls
+                      className="w-full h-[250px] object-cover"
+                    >
+                      <source
+                        src={hotel.video}
+                        type="video/mp4"
+                      />
+                    </video>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Locations */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-[#2F2A25] mb-4">
-              مواقع الإقامة
+        {/* VIP Buses */}
+        <div className="mt-28">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="text-[#8B6B4A] font-semibold">
+              النقل المميز
+            </span>
+
+            <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-[#2F2A25]">
+              باصات VIP
             </h2>
 
-            <p className="text-gray-600">
-              نوفر خيارات إقامة مميزة في أفضل المناطق القريبة من الحرم المكي.
+            <p className="max-w-3xl mx-auto text-gray-600 leading-8">
+              باصات مجهزة بأعلى مستويات الراحة لتوفير تجربة سفر مميزة
+              للمعتمرين والزوار.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {locations.map((location) => (
-              <motion.div
-                key={location.id}
-                whileHover={{ y: -5 }}
-                className="bg-[#FAF7F3] rounded-3xl p-8 shadow-lg border border-[#E8D8C8]"
+          {/* Images */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {vipBusImages.map((img, i) => (
+              <div
+                key={i}
+                className="relative h-[260px] overflow-hidden rounded-3xl shadow-lg"
               >
-                <div className="w-14 h-14 rounded-2xl bg-[#8B6B4A]/10 flex items-center justify-center mb-6">
-                  <MapPin className="w-7 h-7 text-[#8B6B4A]" />
-                </div>
-
-                <h3 className="text-2xl font-bold text-[#2F2A25] mb-4">
-                  {location.title}
-                </h3>
-
-                <p className="text-gray-600 leading-8">
-                  {location.description}
-                </p>
-              </motion.div>
+                <Image
+                  src={img}
+                  alt={`VIP Bus ${i}`}
+                  fill
+                  className="object-cover hover:scale-110 transition duration-500"
+                />
+              </div>
             ))}
           </div>
-        </motion.div>
+
+          {/* Videos */}
+          {/* Videos */}
+
+<div className="mb-12">
+  <h3 className="text-2xl font-bold text-[#2F2A25] mb-6 text-center">
+    فيديوهات الباصات
+  </h3>
+
+  <div className="grid md:grid-cols-2 gap-8">
+    {vipBusVideos.map((video, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.2 }}
+        className="bg-white rounded-3xl overflow-hidden shadow-xl"
+      >
+        <video
+          controls
+          className="w-full h-[350px] object-cover"
+        >
+          <source src={video} type="video/mp4" />
+          المتصفح لا يدعم تشغيل الفيديو
+        </video>
+      </motion.div>
+    ))}
+  </div>
+</div>
+
+          {/* Features */}
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              "مقاعد واسعة",
+              "راحة استثنائية",
+              "تكييف مركزي",
+              "خدمة مميزة",
+            ].map((item) => (
+              <div
+                key={item}
+                className="bg-white rounded-3xl p-6 shadow-lg text-center"
+              >
+                <CheckCircle className="mx-auto mb-4 text-[#8B6B4A]" />
+                <p className="font-semibold text-[#2F2A25]">
+                  {item}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-14">
+            <a
+              href="https://wa.me/966563591198"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                inline-flex
+                items-center
+                justify-center
+                px-10
+                py-4
+                rounded-full
+                bg-[#8B6B4A]
+                text-white
+                font-bold
+                hover:scale-105
+                transition-all
+                duration-300
+                shadow-lg
+              "
+            >
+              احجز الآن
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
+
