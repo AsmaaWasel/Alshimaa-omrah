@@ -65,7 +65,7 @@ export default function PremiumServices() {
 ];
 
   return (
-    <section className="py-24 bg-[#FAF7F3]">
+    <section id="vip-services" className="py-24 bg-[#FAF7F3]">
       <div className="max-w-7xl mx-auto px-6">
         {/* Hotels Header */}
         <motion.div

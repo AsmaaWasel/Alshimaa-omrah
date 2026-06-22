@@ -1,6 +1,6 @@
 import Hero from "@/components/hero";
 
-import Hotels from "@/components/hotels";
+import Hotels from "@/components/VipServices";
 import Contact from "@/components/contact";
 import EconomyServices from "@/components/EconomyServices";
 

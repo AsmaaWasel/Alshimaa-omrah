@@ -47,7 +47,7 @@ export default function EconomyServices() {
   ];
 
   return (
-    <section className="py-24 bg-white">
+    <section id="economy-services" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
 

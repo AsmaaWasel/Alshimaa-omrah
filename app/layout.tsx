@@ -1,8 +1,7 @@
-// app/layout.tsx
-
 import Navbar from "@/components/navbar";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
-
+//commit
 export default function RootLayout({
   children,
 }: {
@@ -13,6 +12,8 @@ export default function RootLayout({
       <body>
         <Navbar />
         <main>{children}</main>
+
+        <WhatsAppButton />
       </body>
     </html>
   );

@@ -4,17 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname();
 
   const navLinks = [
-    { label: "الرئيسية", href: "/" },
-    { label: "الباصات", href: "/buses" },
-    { label: "الفنادق", href: "/hotels" },
-    { label: "تواصل معنا", href: "/contact" },
+    { label: "الرئيسية", href: "#hero" },
+    { label: "عروض VIP", href: "#vip-services" },
+    { label: "العروض الاقتصادية", href: "#economy-services" },
+    { label: "تواصل معنا", href: "#contact" },
   ];
 
   return (
@@ -22,7 +20,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3">
             <div className="relative w-12 h-12 overflow-hidden">
               <Image
                 src="/logo.png"
@@ -43,17 +41,13 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <Link
+              <a
                 key={link.href}
                 href={link.href}
-                className={`font-medium transition-colors ${
-                  pathname === link.href
-                    ? "text-primary"
-                    : "text-foreground hover:text-primary"
-                }`}
+                className="font-medium text-foreground hover:text-primary transition-colors"
               >
                 {link.label}
-              </Link>
+              </a>
             ))}
 
             <a
@@ -80,16 +74,14 @@ export default function Navbar() {
           <div className="md:hidden pb-4 border-t border-border">
             <div className="flex flex-col gap-3 py-4">
               {navLinks.map((link) => (
-                <Link
+                <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setIsOpen(false)}
-                  className={`px-3 py-2 font-medium ${
-                    pathname === link.href ? "text-primary" : "text-foreground"
-                  }`}
+                  className="px-3 py-2 font-medium text-foreground hover:text-primary"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
 
               <a

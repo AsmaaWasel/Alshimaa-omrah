@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { FaInstagram, FaTiktok, FaFacebookF } from "react-icons/fa";
 
 export default function Hero() {
   return (
@@ -95,6 +96,42 @@ export default function Hero() {
             </div>
           </motion.div>
         </div>
+        <p className="text-white/80 text-sm font-medium mt-8 mb-3">
+          تابعنا على منصات التواصل
+        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="flex items-center gap-4 mt-8"
+        >
+          <a
+            href="https://www.instagram.com/qafila_alsyhmaa_likedemati_mut"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-gradient-to-br hover:from-pink-500 hover:to-orange-400 hover:scale-110 transition-all duration-300 shadow-lg"
+          >
+            <FaInstagram className="text-white text-2xl group-hover:scale-110 transition-transform" />
+          </a>
+
+          <a
+            href="https://www.tiktok.com/@alshimaa_makah?_r=1&_t=ZS-97L5QAYAryS"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-black hover:scale-110 transition-all duration-300 shadow-lg"
+          >
+            <FaTiktok className="text-white text-2xl group-hover:scale-110 transition-transform" />
+          </a>
+
+          <a
+            href="https://www.facebook.com/share/1BgfTwUvr2/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300 shadow-lg"
+          >
+            <FaFacebookF className="text-white text-2xl group-hover:scale-110 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );
