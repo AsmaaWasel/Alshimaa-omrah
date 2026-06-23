@@ -3,8 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { FaInstagram, FaTiktok, FaFacebookF } from "react-icons/fa";
+import { useState } from "react";
+import BookingModal from "./BookingModal";
 
 export default function Hero() {
+  const [openBooking, setOpenBooking] = useState(false);
   return (
     <section
       id="hero"
@@ -56,14 +59,12 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="flex flex-wrap gap-4 mt-8"
           >
-            <a
-              href="https://wa.me/966563591198?text=السلام%20عليكم%20أرغب%20في%20حجز%20رحلة%20عمرة"
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={() => setOpenBooking(true)}
               className="bg-[#D9B8A6] text-[#2F2A25] px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition-all duration-300"
             >
               احجز رحلتك الآن
-            </a>
+            </button>
 
             <a
               href="https://wa.me/966563591198"
@@ -72,6 +73,93 @@ export default function Hero() {
               className="border border-white/40 backdrop-blur-md bg-white/10 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition-all duration-300"
             >
               تواصل عبر واتساب
+            </a>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-16"
+          >
+            <a
+              href="#hero"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 p-7 hover:border-white/30 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-white/5"
+            >
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
+                    🏠
+                  </span>
+                </div>
+                <h3 className="text-white font-semibold text-base tracking-wide">
+                  الرئيسية
+                </h3>
+                <p className="text-white/50 text-sm mt-1.5 font-light leading-relaxed">
+                  تعرف على خدماتنا
+                </p>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </a>
+
+            <a
+              href="#vip-services"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 p-7 hover:border-white/30 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-white/5"
+            >
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
+                    ⭐
+                  </span>
+                </div>
+                <h3 className="text-white font-semibold text-base tracking-wide">
+                  عروض VIP
+                </h3>
+                <p className="text-white/50 text-sm mt-1.5 font-light leading-relaxed">
+                  فنادق وباصات مميزة
+                </p>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </a>
+
+            <a
+              href="#economy-services"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 p-7 hover:border-white/30 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-white/5"
+            >
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
+                    💰
+                  </span>
+                </div>
+                <h3 className="text-white font-semibold text-base tracking-wide">
+                  العروض الاقتصادية
+                </h3>
+                <p className="text-white/50 text-sm mt-1.5 font-light leading-relaxed">
+                  أفضل الأسعار للمعتمرين
+                </p>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </a>
+
+            <a
+              href="#contact"
+              className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10 p-7 hover:border-white/30 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-white/5"
+            >
+              <div className="relative z-10">
+                <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-all duration-300">
+                  <span className="text-2xl group-hover:scale-110 transition-transform duration-300">
+                    📞
+                  </span>
+                </div>
+                <h3 className="text-white font-semibold text-base tracking-wide">
+                  تواصل معنا
+                </h3>
+                <p className="text-white/50 text-sm mt-1.5 font-light leading-relaxed">
+                  للحجز والاستفسارات
+                </p>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/0 to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </a>
           </motion.div>
           {/* Stats */}
@@ -133,6 +221,10 @@ export default function Hero() {
           </a>
         </motion.div>
       </div>
+      <BookingModal
+        isOpen={openBooking}
+        onClose={() => setOpenBooking(false)}
+      />
     </section>
   );
 }
