@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -10,7 +9,7 @@ export default function PremiumServices() {
     {
       name: "فندق فوكو ",
       description:
-        "إقامة فاخرة وخدمات راقية في موقع مميز لتوفير أقصى درجات الراحة للمعتمرين والزوار.",
+        "خدمات VIP راقية مع إقامة في فندق مميز قريب من الحرم، بالإضافة إلى خدمة نقل مجانية على مدار 24 ساعة من وإلى الحرم لتوفير أقصى درجات الراحة للمعتمرين والزوار.",
       images: [
         "/voco/i-love-voco.jpeg",
         "/voco/voco-gate.jpeg",
@@ -18,14 +17,13 @@ export default function PremiumServices() {
         "/voco/room3.jpeg",
         "/voco/room4.jpeg",
         "/voco/reception-voco.jpeg",
-
       ],
-      video: "/voco/voco-video.mp4",
+      video: "/voco/voco2.mp4",
       features: [
         "فندق خمس نجوم",
         "غرف فاخرة",
-        "خدمات متكاملة",
-        "راحة واستجمام",
+        "مطاعم بوفيه كافيهات",
+        "مواقف سيارات",
       ],
     },
     {
@@ -39,15 +37,9 @@ export default function PremiumServices() {
         "/melemum/melemum-room2.jpeg",
         "/melemum/melemum-room3.jpeg",
         "/melemum/melemum-room4.jpeg",
-        
       ],
       video: "/melemum/video.mp4",
-      features: [
-        "فندق خمس نجوم",
-        "خدمة متميزة",
-        "غرف حديثة",
-        "مرافق متكاملة",
-      ],
+      features: ["فندق خمس نجوم", "خدمة متميزة", "غرف حديثة", "مرافق متكاملة"],
     },
   ];
 
@@ -59,10 +51,7 @@ export default function PremiumServices() {
     "/vip-buses/bus5.jpeg",
   ];
 
-  const vipBusVideos = [
-  "/vip-buses/video1.mp4",
-  "/vip-buses/video3.mp4",
-];
+  const vipBusVideos = ["/vip-buses/video1.mp4", "/vip-buses/video3.mp4"];
 
   return (
     <section id="vip-services" className="py-24 bg-[#FAF7F3]">
@@ -74,9 +63,7 @@ export default function PremiumServices() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-[#8B6B4A] font-semibold">
-            الإقامة الفاخرة
-          </span>
+          <span className="text-[#8B6B4A] font-semibold">الإقامة الفاخرة</span>
 
           <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-[#2F2A25]">
             فنادق الخمس نجوم
@@ -106,10 +93,7 @@ export default function PremiumServices() {
                 {/* Images */}
                 <div className="grid grid-cols-2 gap-2 p-2">
                   {hotel.images.map((img, i) => (
-                    <div
-                      key={i}
-                      className="relative h-[180px] md:h-[240px]"
-                    >
+                    <div key={i} className="relative h-[180px] md:h-[240px]">
                       <Image
                         src={img}
                         alt={hotel.name}
@@ -132,10 +116,7 @@ export default function PremiumServices() {
 
                   <div className="grid sm:grid-cols-2 gap-4 mb-8">
                     {hotel.features.map((feature, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center gap-3"
-                      >
+                      <div key={idx} className="flex items-center gap-3">
                         <CheckCircle className="w-5 h-5 text-[#8B6B4A]" />
                         <span>{feature}</span>
                       </div>
@@ -143,14 +124,8 @@ export default function PremiumServices() {
                   </div>
 
                   <div className="overflow-hidden rounded-2xl">
-                    <video
-                      controls
-                      className="w-full h-[250px] object-cover"
-                    >
-                      <source
-                        src={hotel.video}
-                        type="video/mp4"
-                      />
+                    <video controls className="w-full h-[250px] object-cover">
+                      <source src={hotel.video} type="video/mp4" />
                     </video>
                   </div>
                 </div>
@@ -167,17 +142,15 @@ export default function PremiumServices() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="text-[#8B6B4A] font-semibold">
-              النقل المميز
-            </span>
+            <span className="text-[#8B6B4A] font-semibold">النقل المميز</span>
 
             <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-[#2F2A25]">
               باصات VIP
             </h2>
 
             <p className="max-w-3xl mx-auto text-gray-600 leading-8">
-              باصات مجهزة بأعلى مستويات الراحة لتوفير تجربة سفر مميزة
-              للمعتمرين والزوار.
+              باصات مجهزة بأعلى مستويات الراحة لتوفير تجربة سفر مميزة للمعتمرين
+              والزوار.
             </p>
           </motion.div>
 
@@ -201,51 +174,43 @@ export default function PremiumServices() {
           {/* Videos */}
           {/* Videos */}
 
-<div className="mb-12">
-  <h3 className="text-2xl font-bold text-[#2F2A25] mb-6 text-center">
-    فيديوهات الباصات
-  </h3>
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-[#2F2A25] mb-6 text-center">
+              فيديوهات الباصات
+            </h3>
 
-  <div className="grid md:grid-cols-2 gap-8">
-    {vipBusVideos.map((video, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: index * 0.2 }}
-        className="bg-white rounded-3xl overflow-hidden shadow-xl"
-      >
-        <video
-          controls
-          className="w-full h-[350px] object-cover"
-        >
-          <source src={video} type="video/mp4" />
-          المتصفح لا يدعم تشغيل الفيديو
-        </video>
-      </motion.div>
-    ))}
-  </div>
-</div>
+            <div className="grid md:grid-cols-2 gap-8">
+              {vipBusVideos.map((video, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  className="bg-white rounded-3xl overflow-hidden shadow-xl"
+                >
+                  <video controls className="w-full h-[350px] object-cover">
+                    <source src={video} type="video/mp4" />
+                    المتصفح لا يدعم تشغيل الفيديو
+                  </video>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
           {/* Features */}
           <div className="grid md:grid-cols-4 gap-6">
-            {[
-              "مقاعد واسعة",
-              "راحة استثنائية",
-              "تكييف مركزي",
-              "خدمة مميزة",
-            ].map((item) => (
-              <div
-                key={item}
-                className="bg-white rounded-3xl p-6 shadow-lg text-center"
-              >
-                <CheckCircle className="mx-auto mb-4 text-[#8B6B4A]" />
-                <p className="font-semibold text-[#2F2A25]">
-                  {item}
-                </p>
-              </div>
-            ))}
+            {["مقاعد واسعة", "راحة استثنائية", "تكييف مركزي", "خدمة مميزة"].map(
+              (item) => (
+                <div
+                  key={item}
+                  className="bg-white rounded-3xl p-6 shadow-lg text-center"
+                >
+                  <CheckCircle className="mx-auto mb-4 text-[#8B6B4A]" />
+                  <p className="font-semibold text-[#2F2A25]">{item}</p>
+                </div>
+              ),
+            )}
           </div>
 
           {/* CTA */}
@@ -278,4 +243,3 @@ export default function PremiumServices() {
     </section>
   );
 }
-
