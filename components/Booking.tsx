@@ -16,8 +16,8 @@ export default function BookingSection() {
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
-    package: "اقتصادية",
-    people: "",
+    pilgrims: "",
+    seats: "",
     date: "",
     notes: "",
   });
@@ -26,17 +26,17 @@ export default function BookingSection() {
     e.preventDefault();
 
     const message = `
-طلب حجز عمرة جديد 🌙
+طلب حجز عمرة جديد 🕋
 
 الاسم: ${formData.name}
 
-رقم الجوال: ${formData.phone}
+الجوال: ${formData.phone}
 
-نوع الباقة: ${formData.package}
+عدد المعتمرين: ${formData.pilgrims}
 
-عدد الأشخاص: ${formData.people}
+عدد المقاعد في الباص: ${formData.seats}
 
-تاريخ الرحلة: ${formData.date}
+التاريخ المفضل: ${formData.date}
 
 ملاحظات:
 ${formData.notes}
@@ -138,6 +138,7 @@ ${formData.notes}
             className="bg-white rounded-[32px] shadow-xl border border-[#ece7dc] p-10"
           >
             <div className="grid md:grid-cols-2 gap-6">
+              {/* الاسم */}
               <div>
                 <label className="font-semibold mb-2 block">الاسم</label>
 
@@ -163,8 +164,9 @@ ${formData.notes}
                 </div>
               </div>
 
+              {/* الجوال */}
               <div>
-                <label className="font-semibold mb-2 block">رقم الجوال</label>
+                <label className="font-semibold mb-2 block">الجوال</label>
 
                 <div className="relative">
                   <Phone
@@ -176,7 +178,7 @@ ${formData.notes}
                     required
                     dir="ltr"
                     type="tel"
-                    placeholder="05xxxxxxxx"
+                    placeholder="+966 5xxxxxxxx"
                     value={formData.phone}
                     onChange={(e) =>
                       setFormData({
@@ -191,29 +193,11 @@ ${formData.notes}
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 mt-6">
+              {/* عدد المعتمرين */}
               <div>
-                <label className="font-semibold mb-2 block">نوع الباقة</label>
-
-                <select
-                  value={formData.package}
-                  onChange={(e) =>
-                    setFormData({
-                      ...formData,
-                      package: e.target.value,
-                    })
-                  }
-                  className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
-                >
-                  <option>اقتصادية</option>
-
-                  <option>VIP</option>
-
-                  <option>حجز مقعد فقط</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="font-semibold mb-2 block">عدد الأشخاص</label>
+                <label className="font-semibold mb-2 block">
+                  عدد المعتمرين
+                </label>
 
                 <div className="relative">
                   <Users
@@ -224,12 +208,40 @@ ${formData.notes}
                   <input
                     required
                     type="number"
-                    placeholder="1"
-                    value={formData.people}
+                    placeholder="عدد الأشخاص"
+                    value={formData.pilgrims}
                     onChange={(e) =>
                       setFormData({
                         ...formData,
-                        people: e.target.value,
+                        pilgrims: e.target.value,
+                      })
+                    }
+                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                  />
+                </div>
+              </div>
+
+              {/* المقاعد */}
+              <div>
+                <label className="font-semibold mb-2 block">
+                  عدد المقاعد في الباص
+                </label>
+
+                <div className="relative">
+                  <Bus
+                    className="absolute right-4 top-4 text-gray-400"
+                    size={20}
+                  />
+
+                  <input
+                    required
+                    type="number"
+                    placeholder="عدد المقاعد"
+                    value={formData.seats}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        seats: e.target.value,
                       })
                     }
                     className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
@@ -238,8 +250,9 @@ ${formData.notes}
               </div>
             </div>
 
+            {/* التاريخ */}
             <div className="mt-6">
-              <label className="font-semibold mb-2 block">تاريخ الرحلة</label>
+              <label className="font-semibold mb-2 block">التاريخ المفضل</label>
 
               <input
                 required
@@ -255,11 +268,13 @@ ${formData.notes}
               />
             </div>
 
+            {/* ملاحظات */}
             <div className="mt-6">
               <label className="font-semibold mb-2 block">ملاحظات</label>
 
               <textarea
                 rows={5}
+                placeholder="اكتب أي تفاصيل إضافية..."
                 value={formData.notes}
                 onChange={(e) =>
                   setFormData({
@@ -267,7 +282,6 @@ ${formData.notes}
                     notes: e.target.value,
                   })
                 }
-                placeholder="اكتب أي تفاصيل إضافية..."
                 className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
               />
             </div>
