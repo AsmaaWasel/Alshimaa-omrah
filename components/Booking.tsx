@@ -1,0 +1,195 @@
+"use client";
+
+import { motion } from "framer-motion";
+import {
+  User,
+  Phone,
+  Users,
+  CalendarDays,
+  BedDouble,
+  Bus,
+  Send,
+} from "lucide-react";
+
+export default function BookingSection() {
+  return (
+    <section
+      id="booking"
+      className="relative py-24 bg-gradient-to-b from-[#fbf9f5] to-white overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,164,77,.08),transparent_60%)]" />
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Heading */}
+
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <span className="inline-flex rounded-full bg-[#c8a44d]/10 px-5 py-2 font-semibold text-[#c8a44d]">
+            احجز الآن
+          </span>
+
+          <h2 className="mt-6 text-5xl font-black text-[#2F2A25]">
+            احجز رحلة العمر
+          </h2>
+
+          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto leading-8">
+            املأ البيانات التالية وسيتواصل معك فريق قافلة الشيماء لتأكيد الحجز
+            والإجابة على جميع استفساراتك.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid lg:grid-cols-2 gap-12"
+        >
+          {/* المعلومات */}
+
+          <div className="bg-[#2F2A25] rounded-[32px] p-10 text-white">
+            <h3 className="text-3xl font-bold mb-8">لماذا تحجز معنا؟</h3>
+
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <Bus className="text-[#c8a44d]" />
+                <div>
+                  <h4 className="font-bold">باصات حديثة</h4>
+                  <p className="text-white/70 mt-1">
+                    موديلات حديثة مجهزة بأعلى وسائل الراحة.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <BedDouble className="text-[#c8a44d]" />
+                <div>
+                  <h4 className="font-bold">فنادق مميزة</h4>
+                  <p className="text-white/70 mt-1">
+                    إقامة بفنادق 3 و5 نجوم بالقرب من الحرم.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <CalendarDays className="text-[#c8a44d]" />
+                <div>
+                  <h4 className="font-bold">رحلات منتظمة</h4>
+                  <p className="text-white/70 mt-1">
+                    رحلات اقتصادية يوميًا وVIP يومي الاثنين والخميس.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-10 rounded-2xl bg-white/10 p-6">
+              <p className="leading-8 text-white/80">
+                بعد إرسال الطلب سيتم التواصل معك مباشرة لتأكيد الحجز وإرسال جميع
+                التفاصيل الخاصة بالرحلة.
+              </p>
+            </div>
+          </div>
+
+          {/* الفورم */}
+
+          <form className="bg-white rounded-[32px] shadow-xl border border-[#ece7dc] p-10">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="font-semibold mb-2 block">الاسم</label>
+
+                <div className="relative">
+                  <User
+                    className="absolute right-4 top-4 text-gray-400"
+                    size={20}
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="الاسم بالكامل"
+                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="font-semibold mb-2 block">رقم الجوال</label>
+
+                <div className="relative">
+                  <Phone
+                    className="absolute right-4 top-4 text-gray-400"
+                    size={20}
+                  />
+
+                  <input
+                    type="tel"
+                    placeholder="05xxxxxxxx"
+                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 mt-6">
+              <div>
+                <label className="font-semibold mb-2 block">نوع الباقة</label>
+
+                <select className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]">
+                  <option>اقتصادية</option>
+                  <option>VIP</option>
+                  <option>حجز مقعد فقط</option>
+                </select>
+              </div>
+
+              <div>
+                <label className="font-semibold mb-2 block">عدد الأشخاص</label>
+
+                <div className="relative">
+                  <Users
+                    className="absolute right-4 top-4 text-gray-400"
+                    size={20}
+                  />
+
+                  <input
+                    type="number"
+                    placeholder="1"
+                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <label className="font-semibold mb-2 block">تاريخ الرحلة</label>
+
+              <input
+                type="date"
+                className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
+              />
+            </div>
+
+            <div className="mt-6">
+              <label className="font-semibold mb-2 block">ملاحظات</label>
+
+              <textarea
+                rows={5}
+                placeholder="اكتب أي تفاصيل إضافية..."
+                className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="mt-8 w-full rounded-full bg-[#c8a44d] py-4 text-lg font-bold text-[#2F2A25] hover:scale-[1.02] transition flex items-center justify-center gap-2"
+            >
+              إرسال طلب الحجز
+              <Send size={18} />
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
