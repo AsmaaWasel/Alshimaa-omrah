@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   User,
@@ -12,6 +13,42 @@ import {
 } from "lucide-react";
 
 export default function BookingSection() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    package: "اقتصادية",
+    people: "",
+    date: "",
+    notes: "",
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const message = `
+طلب حجز عمرة جديد 🌙
+
+الاسم: ${formData.name}
+
+رقم الجوال: ${formData.phone}
+
+نوع الباقة: ${formData.package}
+
+عدد الأشخاص: ${formData.people}
+
+تاريخ الرحلة: ${formData.date}
+
+ملاحظات:
+${formData.notes}
+`;
+
+    const whatsappUrl = `https://wa.me/966563591198?text=${encodeURIComponent(
+      message,
+    )}`;
+
+    window.open(whatsappUrl, "_blank");
+  };
+
   return (
     <section
       id="booking"
@@ -20,8 +57,6 @@ export default function BookingSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,164,77,.08),transparent_60%)]" />
 
       <div className="relative max-w-7xl mx-auto px-6">
-        {/* Heading */}
-
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -48,8 +83,7 @@ export default function BookingSection() {
           viewport={{ once: true }}
           className="grid lg:grid-cols-2 gap-12"
         >
-          {/* المعلومات */}
-
+          {/* معلومات */}
           <div className="bg-[#2F2A25] rounded-[32px] p-10 text-white">
             <h3 className="text-3xl font-bold mb-8">لماذا تحجز معنا؟</h3>
 
@@ -66,8 +100,10 @@ export default function BookingSection() {
 
               <div className="flex gap-4">
                 <BedDouble className="text-[#c8a44d]" />
+
                 <div>
                   <h4 className="font-bold">فنادق مميزة</h4>
+
                   <p className="text-white/70 mt-1">
                     إقامة بفنادق 3 و5 نجوم بالقرب من الحرم.
                   </p>
@@ -76,8 +112,10 @@ export default function BookingSection() {
 
               <div className="flex gap-4">
                 <CalendarDays className="text-[#c8a44d]" />
+
                 <div>
                   <h4 className="font-bold">رحلات منتظمة</h4>
+
                   <p className="text-white/70 mt-1">
                     رحلات اقتصادية يوميًا وVIP يومي الاثنين والخميس.
                   </p>
@@ -95,7 +133,10 @@ export default function BookingSection() {
 
           {/* الفورم */}
 
-          <form className="bg-white rounded-[32px] shadow-xl border border-[#ece7dc] p-10">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white rounded-[32px] shadow-xl border border-[#ece7dc] p-10"
+          >
             <div className="grid md:grid-cols-2 gap-6">
               <div>
                 <label className="font-semibold mb-2 block">الاسم</label>
@@ -107,8 +148,16 @@ export default function BookingSection() {
                   />
 
                   <input
+                    required
                     type="text"
                     placeholder="الاسم بالكامل"
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        name: e.target.value,
+                      })
+                    }
                     className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
                   />
                 </div>
@@ -124,8 +173,17 @@ export default function BookingSection() {
                   />
 
                   <input
+                    required
+                    dir="ltr"
                     type="tel"
                     placeholder="05xxxxxxxx"
+                    value={formData.phone}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        phone: e.target.value,
+                      })
+                    }
                     className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
                   />
                 </div>
@@ -136,9 +194,20 @@ export default function BookingSection() {
               <div>
                 <label className="font-semibold mb-2 block">نوع الباقة</label>
 
-                <select className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]">
+                <select
+                  value={formData.package}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      package: e.target.value,
+                    })
+                  }
+                  className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                >
                   <option>اقتصادية</option>
+
                   <option>VIP</option>
+
                   <option>حجز مقعد فقط</option>
                 </select>
               </div>
@@ -153,8 +222,16 @@ export default function BookingSection() {
                   />
 
                   <input
+                    required
                     type="number"
                     placeholder="1"
+                    value={formData.people}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        people: e.target.value,
+                      })
+                    }
                     className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
                   />
                 </div>
@@ -165,7 +242,15 @@ export default function BookingSection() {
               <label className="font-semibold mb-2 block">تاريخ الرحلة</label>
 
               <input
+                required
                 type="date"
+                value={formData.date}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    date: e.target.value,
+                  })
+                }
                 className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
               />
             </div>
@@ -175,6 +260,13 @@ export default function BookingSection() {
 
               <textarea
                 rows={5}
+                value={formData.notes}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    notes: e.target.value,
+                  })
+                }
                 placeholder="اكتب أي تفاصيل إضافية..."
                 className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
               />

@@ -109,7 +109,12 @@ export default function Contact() {
                 <p className="text-sm text-muted-foreground mb-2">
                   {method.description}
                 </p>
-                <p className="text-primary font-bold">{method.contact}</p>
+                <p
+                  dir={method.title === "الهاتف" ? "ltr" : undefined}
+                  className="text-primary font-bold inline-block"
+                >
+                  {method.contact}
+                </p>
               </motion.a>
             );
           })}
@@ -196,7 +201,12 @@ export default function Contact() {
           className="mt-12 pt-8 border-t border-border text-center text-muted-foreground"
         >
           <p>© 2026 الشيماء لخدمات العمرة والزوار. جميع الحقوق محفوظة.</p>
-          <p className="mt-2">رقم الجوال: +966 56 359 1198</p>
+          <p className="mt-2">
+            رقم الجوال:{" "}
+            <span dir="ltr" className="inline-block">
+              +966 56 359 1198
+            </span>
+          </p>
         </motion.div>
       </div>
     </section>
