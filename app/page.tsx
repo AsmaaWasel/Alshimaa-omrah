@@ -7,6 +7,7 @@ import Packages from "@/components/packages";
 import Booking from "@/components/Booking";
 import FAQ from "@/components/FAQ";
 import PackagesComparison from "@/components/PackagesComparsion";
+import PricesSection from "@/components/PricesSection";
 
 export default function Page() {
   return (
@@ -16,6 +17,7 @@ export default function Page() {
       <EconomyServices />
       <Packages />
       <PackagesComparison />
+      <PricesSection />
       <FAQ />
       <Booking />
       <Contact />
