@@ -9,10 +9,11 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { label: "الرئيسية", href: "#hero" },
-    { label: "عروض VIP", href: "#vip-services" },
-    { label: "العروض الاقتصادية", href: "#economy-services" },
-    { label: "تواصل معنا", href: "#contact" },
+    { label: "الرئيسية", href: "/" },
+    { label: "عروض VIP", href: "/vip" },
+    { label: "العروض الاقتصادية", href: "/economic" },
+    { label: "الباصات", href: "/buses" },
+    { label: "تواصل معنا", href: "/contact" },
   ];
 
   return (
