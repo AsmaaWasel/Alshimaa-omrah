@@ -45,13 +45,13 @@ export default function PremiumServices() {
 
   const vipBusImages = [
     "/vip-buses/bus1.jpeg",
-    "/vip-buses/bus2.jpeg",
+    "/vip-buses/bus6.jpeg",
     "/vip-buses/bus3.jpeg",
     "/vip-buses/bus4.jpeg",
     "/vip-buses/bus5.jpeg",
   ];
 
-  const vipBusVideos = ["/vip-buses/video1.mp4", "/vip-buses/video3.mp4"];
+  const vipBusVideos = ["/vip-buses/video1.mp4", "/vip-buses/video2.mp4"];
 
   return (
     <section id="vip-services" className="py-24 bg-[#FAF7F3]">
