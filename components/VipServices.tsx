@@ -53,7 +53,7 @@ export default function PremiumServices() {
         "/holiday-in/photo5.jpeg",
         "/holiday-in/photo6.jpeg",
       ],
-      video: "/holidayinn/video1.mp4",
+      video: "/holiday-in/video1.mp4",
       features: ["فندق خمس نجوم", "حي العزيزية الشمالية", "مسبح", "أوبن بوفيه"],
     },
   ];
