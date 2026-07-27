@@ -41,6 +41,21 @@ export default function PremiumServices() {
       video: "/melemum/video.mp4",
       features: ["فندق خمس نجوم", "خدمة متميزة", "غرف حديثة", "مرافق متكاملة"],
     },
+    {
+      name: "فندق هوليداي إن",
+      description:
+        "فندق نضيف ومرتب بتصنيف خمس نجوم في حي العزيزية الشمالية، يتميز بوجود مسبح وأوبن بوفيه، مع خدمات راقية تناسب ضيوف الرحمن الباحثين عن الراحة والهدوء.",
+      images: [
+        "/holiday-in/photo1.jpeg",
+        "/holiday-in/photo2.jpeg",
+        "/holiday-in/photo3.jpeg",
+        "/holiday-in/photo4.jpeg",
+        "/holiday-in/photo5.jpeg",
+        "/holiday-in/photo6.jpeg",
+      ],
+      video: "/holidayinn/video1.mp4",
+      features: ["فندق خمس نجوم", "حي العزيزية الشمالية", "مسبح", "أوبن بوفيه"],
+    },
   ];
 
   const vipBusImages = [
@@ -172,8 +187,6 @@ export default function PremiumServices() {
           </div>
 
           {/* Videos */}
-          {/* Videos */}
-
           <div className="mb-12">
             <h3 className="text-2xl font-bold text-[#2F2A25] mb-6 text-center">
               فيديوهات الباصات
