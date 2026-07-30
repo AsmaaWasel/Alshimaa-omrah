@@ -120,6 +120,43 @@ export default function Contact() {
           })}
         </motion.div>
 
+        {/* Map Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-12"
+        >
+          <div className="bg-background rounded-2xl shadow-md overflow-hidden">
+            <div className="p-6 pb-4 flex items-center gap-3">
+              <div className="bg-accent/20 w-12 h-12 rounded-full flex items-center justify-center">
+                <MapPin className="w-6 h-6 text-accent" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-foreground">
+                  موقعنا على الخريطة
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  حي البطحاء، الرياض، المملكة العربية السعودية
+                </p>
+              </div>
+            </div>
+            <div className="w-full h-[400px]">
+              <iframe
+                title="موقع الشيماء لخدمات العمرة والزوار - حي البطحاء، الرياض"
+                src="https://www.google.com/maps?q=%D8%AD%D9%8A%20%D8%A7%D9%84%D8%A8%D8%B7%D8%AD%D8%A7%D8%8C%20%D8%A7%D9%84%D8%B1%D9%8A%D8%A7%D8%B6%D8%8C%20%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+        </motion.div>
+
         {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
