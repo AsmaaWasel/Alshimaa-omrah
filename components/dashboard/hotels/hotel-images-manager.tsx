@@ -2,7 +2,7 @@
 
 import { Trash2, Upload } from "lucide-react";
 import { useState } from "react";
-import { uploadHotelImage, deleteHotelImage } from "@/app/actions/hotels";
+import { addHotelImage, deleteHotelImage } from "@/app/actions/hotels";
 type Props = {
   hotelId: number;
 
@@ -40,7 +40,7 @@ export default function HotelImagesManager({
         const data = await res.json();
 
         if (data.url) {
-          const image = await uploadHotelImage({
+          const image = await addHotelImage({
             hotelId,
             imageUrl: data.url,
           });

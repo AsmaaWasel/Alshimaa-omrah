@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Trash2, Upload } from "lucide-react";
-import { uploadBusImage, deleteBusImage } from "@/app/actions/buses";
+import { addBusImage, deleteBusImage } from "@/app/actions/buses";
 
 type Props = {
   busId: number;
@@ -43,7 +43,7 @@ export default function BusImagesManager({
         const data = await res.json();
 
         if (data.url) {
-          const image = await uploadBusImage({
+          const image = await addBusImage({
             busId,
             imageUrl: data.url,
           });

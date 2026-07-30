@@ -1,4 +1,4 @@
-import { getHotel } from "@/app/actions/hotels";
+
 import HotelImagesManager from "@/components/dashboard/hotels/hotel-images-manager";
 
 type Props = {
