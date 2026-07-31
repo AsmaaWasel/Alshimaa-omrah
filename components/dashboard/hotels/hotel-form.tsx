@@ -4,28 +4,39 @@ import { useState } from "react";
 import { Upload } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+
 type Hotel = {
   id: number;
-  title: string;
+  name: string;
   description?: string | null;
-  hotelType: string;
+  location?: string | null;
+  stars: number;
   packageType: string;
 };
 
 type HotelFormProps = {
-  onSubmit?: (data: FormData) => void;
+  onSubmit?: (data: FormData) => Promise<void> | void;
   initialData?: Hotel;
 };
 
 export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
   const [images, setImages] = useState<File[]>([]);
+  const [videos, setVideos] = useState<File[]>([]);
+
   const router = useRouter();
+
   const [loading, setLoading] = useState(false);
 
   const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
 
     setImages(Array.from(e.target.files));
+  };
+
+  const handleVideos = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files) return;
+
+    setVideos(Array.from(e.target.files));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,6 +55,10 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
         formData.append("images", image);
       });
 
+      videos.forEach((video) => {
+        formData.append("videos", video);
+      });
+
       await onSubmit?.(formData);
 
       toast.dismiss(loadingToast);
@@ -53,6 +68,7 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
       );
 
       router.push("/dashboard/hotels");
+
       router.refresh();
     } catch (error) {
       console.error(error);
@@ -64,27 +80,31 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
       setLoading(false);
     }
   };
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-6 bg-white p-6 rounded-xl shadow"
-    >
-      {initialData && <input type="hidden" name="id" value={initialData.id} />}
+    <form onSubmit={handleSubmit} className="space-y-6" dir="rtl">
       {/* اسم الفندق */}
+
       <div>
         <label className="block mb-2 font-semibold">اسم الفندق</label>
 
         <input
-          name="title"
+          name="name"
           type="text"
-          defaultValue={initialData?.title}
+          defaultValue={initialData?.name ?? ""}
           placeholder="مثال: فندق ميلينيوم"
-          className="w-full rounded-lg border p-3"
+          className="
+w-full
+rounded-lg
+border
+p-3
+"
           required
         />
       </div>
 
       {/* الوصف */}
+
       <div>
         <label className="block mb-2 font-semibold">شرح الفندق</label>
 
@@ -93,38 +113,74 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
           defaultValue={initialData?.description ?? ""}
           placeholder="اكتب تفاصيل الفندق والخدمات..."
           rows={5}
-          className="w-full rounded-lg border p-3"
+          className="
+w-full
+rounded-lg
+border
+p-3
+"
         />
       </div>
 
-      {/* نوع الفندق */}
+      {/* الموقع */}
+
       <div>
-        <label className="block mb-2 font-semibold">نوع الفندق</label>
+        <label className="block mb-2 font-semibold">الموقع</label>
+
+        <input
+          name="location"
+          type="text"
+          defaultValue={initialData?.location ?? ""}
+          placeholder="مثال: مكة - العزيزية"
+          className="
+w-full
+rounded-lg
+border
+p-3
+"
+        />
+      </div>
+
+      {/* النجوم */}
+
+      <div>
+        <label className="block mb-2 font-semibold">عدد النجوم</label>
 
         <select
-          name="hotelType"
-          defaultValue={initialData?.hotelType}
-          className="w-full rounded-lg border p-3"
+          name="stars"
+          defaultValue={initialData?.stars?.toString()}
+          className="
+w-full
+rounded-lg
+border
+p-3
+"
           required
         >
-          <option value="">اختر نوع الفندق</option>
+          <option value="">اختر عدد النجوم</option>
 
-          <option value="3_stars">3 نجوم</option>
+          <option value="3">3 نجوم</option>
 
-          <option value="4_stars">4 نجوم</option>
+          <option value="4">4 نجوم</option>
 
-          <option value="5_stars">5 نجوم</option>
+          <option value="5">5 نجوم</option>
         </select>
       </div>
 
       {/* نوع الباقة */}
+
       <div>
         <label className="block mb-2 font-semibold">نوع الباقة</label>
 
         <select
           name="packageType"
           defaultValue={initialData?.packageType}
-          className="w-full rounded-lg border p-3"
+          className="
+w-full
+rounded-lg
+border
+p-3
+"
           required
         >
           <option value="">اختر الباقة</option>
@@ -135,11 +191,23 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
         </select>
       </div>
 
-      {/* الصور */}
+      {/* صور الفندق */}
+
       <div>
         <label className="block mb-2 font-semibold">صور الفندق</label>
 
-        <label className="flex cursor-pointer items-center gap-3 rounded-lg border p-4 hover:bg-gray-50">
+        <label
+          className="
+flex
+cursor-pointer
+items-center
+gap-3
+rounded-lg
+border
+p-4
+hover:bg-gray-50
+"
+        >
           <Upload size={20} />
 
           <span>اختر صور</span>
@@ -157,7 +225,48 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
           <div className="mt-4 space-y-2">
             {images.map((image) => (
               <div key={image.name} className="text-sm text-gray-600">
-                {image.name}
+                🖼️ {image.name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* فيديوهات الفندق */}
+
+      <div>
+        <label className="block mb-2 font-semibold">فيديوهات الفندق</label>
+
+        <label
+          className="
+flex
+cursor-pointer
+items-center
+gap-3
+rounded-lg
+border
+p-4
+hover:bg-gray-50
+"
+        >
+          <Upload size={20} />
+
+          <span>اختر فيديوهات</span>
+
+          <input
+            type="file"
+            accept="video/*"
+            multiple
+            hidden
+            onChange={handleVideos}
+          />
+        </label>
+
+        {videos.length > 0 && (
+          <div className="mt-4 space-y-2">
+            {videos.map((video) => (
+              <div key={video.name} className="text-sm text-gray-600">
+                🎥 {video.name}
               </div>
             ))}
           </div>
@@ -166,9 +275,17 @@ export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
 
       <button
         type="submit"
-        className="w-full rounded-lg bg-black py-3 text-white"
+        disabled={loading}
+        className="
+w-full
+rounded-lg
+bg-black
+py-3
+text-white
+disabled:opacity-50
+"
       >
-        حفظ الفندق
+        {loading ? "جاري الحفظ..." : "حفظ الفندق"}
       </button>
     </form>
   );

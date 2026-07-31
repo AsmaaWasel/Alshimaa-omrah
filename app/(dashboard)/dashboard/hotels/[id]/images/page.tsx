@@ -1,4 +1,4 @@
-
+import { getHotelById } from "@/app/actions/hotels";
 import HotelImagesManager from "@/components/dashboard/hotels/hotel-images-manager";
 
 type Props = {
@@ -10,15 +10,11 @@ type Props = {
 export default async function HotelImagesPage({ params }: Props) {
   const { id } = await params;
 
-  const hotel = await getHotel(Number(id));
+  const hotel = await getHotelById(Number(id));
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold">صور الفندق</h1>
-
-        <p className="text-gray-500">{hotel.title}</p>
-      </div>
+    <div className="p-6" dir="rtl">
+      <h1 className="text-2xl font-bold mb-6">صور {hotel.name}</h1>
 
       <HotelImagesManager hotelId={hotel.id} images={hotel.images} />
     </div>

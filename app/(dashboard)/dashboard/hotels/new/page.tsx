@@ -15,12 +15,10 @@ export default function NewHotelPage() {
   }
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-3xl font-bold text-gray-900">إضافة فندق جديد</h1>
+    <div>
+      <h1 className="text-2xl font-bold">إضافة فندق جديد</h1>
 
-        <p className="mt-2 text-gray-500">أضف بيانات الفندق والصور الخاصة به</p>
-      </div>
+      <p className="mt-2 text-gray-500">أضف بيانات الفندق والصور والفيديو</p>
 
       <HotelForm onSubmit={handleSubmit} />
     </div>

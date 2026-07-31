@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { deleteHotel } from "@/app/actions/hotels";
 import { toast } from "sonner";
@@ -15,6 +16,8 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Pencil } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
 type Props = {
   id: number;
@@ -23,28 +26,43 @@ type Props = {
 export default function HotelActions({ id }: Props) {
   const router = useRouter();
 
+  const [loading, setLoading] = useState(false);
+
   async function handleDelete() {
-    const loading = toast.loading("جاري حذف الفندق...");
+    setLoading(true);
+
+    const toastId = toast.loading("جاري حذف الفندق...");
 
     try {
       await deleteHotel(id);
 
-      toast.dismiss(loading);
-      toast.success("تم حذف الفندق بنجاح");
+      toast.dismiss(toastId);
+
+      toast.success("تم حذف الفندق وجميع بياناته بنجاح");
 
       router.refresh();
-    } catch {
-      toast.dismiss(loading);
-      toast.error("حدث خطأ أثناء الحذف");
+    } catch (error) {
+      console.error(error);
+
+      toast.dismiss(toastId);
+
+      toast.error("حدث خطأ أثناء حذف الفندق");
+    } finally {
+      setLoading(false);
     }
   }
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>
-        <button className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600">
-          حذف
-        </button>
+      <AlertDialogTrigger
+        className="
+    rounded-lg
+    p-2
+    text-red-600
+    hover:bg-red-50
+  "
+      >
+        <Trash2 className="h-5 w-5" />
       </AlertDialogTrigger>
 
       <AlertDialogContent dir="rtl">
@@ -52,8 +70,8 @@ export default function HotelActions({ id }: Props) {
           <AlertDialogTitle>حذف الفندق</AlertDialogTitle>
 
           <AlertDialogDescription>
-            هل أنت متأكد من حذف هذا الفندق؟ سيتم حذف الفندق وجميع صوره نهائيًا،
-            ولا يمكن التراجع عن هذا الإجراء.
+            هل أنت متأكد من حذف هذا الفندق؟ سيتم حذف الفندق وجميع الصور
+            والفيديوهات والمميزات الخاصة به نهائيًا.
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -62,9 +80,13 @@ export default function HotelActions({ id }: Props) {
 
           <AlertDialogAction
             onClick={handleDelete}
-            className="bg-red-600 hover:bg-red-700"
+            disabled={loading}
+            className="
+            bg-red-600
+            hover:bg-red-700
+            "
           >
-            حذف
+            {loading ? "جاري الحذف..." : "حذف"}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
