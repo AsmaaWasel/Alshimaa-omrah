@@ -19,64 +19,39 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div
-      className="
-      flex
-      h-screen
-      w-full
-      overflow-hidden
-      bg-stone-100
-      "
-      dir="rtl"
-    >
+    <div className="flex min-h-screen bg-stone-50">
       {/* Sidebar */}
-      <aside
-        className="
-        hidden
-        lg:block
-        h-full
-        w-72
-        shrink-0
-        "
-      >
-        <Sidebar user={session.user} />
-      </aside>
+      <Sidebar user={session.user} />
 
       {/* Content */}
       <div
         className="
-        flex
-        h-full
-        min-w-0
-        flex-1
-        flex-col
+         mr-64
+          flex
+          min-w-0
+          flex-1
+          flex-col
         "
       >
         <Header user={session.user} />
 
         <main
           className="
-          flex-1
-          overflow-y-auto
-          p-4
-          md:p-8
+            flex-1
+            overflow-y-auto
+            p-4
+            md:p-8
           "
         >
-          <div
-            className="
-            mx-auto
-            w-full
-            max-w-7xl
-            "
-          >
+          <div className="mx-auto w-full max-w-7xl">
             <div
               className="
-              rounded-3xl
-              border
-              border-stone-200
-              bg-white
-              p-6
-              shadow-sm
+                rounded-3xl
+                border
+                border-stone-200
+                bg-white
+                p-6
+                shadow-sm
               "
             >
               {children}

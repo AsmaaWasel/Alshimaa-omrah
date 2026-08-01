@@ -36,145 +36,86 @@ export default function Sidebar({ user }: { user: any }) {
   return (
     <aside
       className="
-  flex
-  h-full
-  w-72
-  flex-col
-  bg-[#241B13]
-  text-white
-  "
-      dir="rtl"
+       fixed
+    top-0
+    right-0
+    z-50
+    h-screen
+    w-64
+    bg-[#2B2118]
+    shadow-xl
+      flex
+      flex-col
+      justify-between
+      p-6
+    "
     >
-      {/* Logo */}
-      <div
-        className="
-        border-b
-        border-amber-800/20
-        px-6
-        py-8
-        "
-      >
-        <h1
-          className="
-          text-2xl
-          font-bold
-          text-amber-400
-          "
-        >
-          قافلة الشيماء
-        </h1>
+      <div>
+        {/* Logo */}
+        <div className="mb-8">
+          <h2 className="text-xl font-bold text-white">قافلة الشيماء</h2>
 
-        <p
-          className="
-          mt-2
-          text-sm
-          text-stone-300
-          "
-        >
-          لخدمات المعتمرين والزوار
-        </p>
-      </div>
-
-      {/* Navigation */}
-      <nav
-        className="
-        flex-1
-        space-y-4
-        px-5
-        py-8
-        "
-      >
-        {navItems.map((item) => {
-          const Icon = item.icon;
-
-          const isActive =
-            pathname === item.href || pathname.startsWith(item.href + "/");
-
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`
-              group
-              flex
-              items-center
-              gap-4
-              rounded-2xl
-              px-5
-              py-4
-              transition-all
-              duration-300
-
-              ${
-                isActive
-                  ? "bg-amber-500 text-white shadow-lg"
-                  : "text-stone-200 hover:bg-[#3B3025]"
-              }
-              `}
-            >
-              <Icon
-                size={22}
-                className={
-                  isActive
-                    ? "text-white"
-                    : "text-amber-400 group-hover:text-amber-300"
-                }
-              />
-
-              <span
-                className="
-                text-[15px]
-                font-medium
-                "
-              >
-                {item.label}
-              </span>
-            </Link>
-          );
-        })}
-      </nav>
-
-      {/* User */}
-      <div
-        className="
-        border-t
-        border-amber-800/20
-        p-6
-        "
-      >
-        <div
-          className="
-          mb-5
-          rounded-2xl
-          bg-[#3A2E22]
-          p-4
-          "
-        >
-          <p
-            className="
-            text-xs
-            text-stone-400
-            "
-          >
-            الحساب الحالي
-          </p>
-
-          <p
-            className="
-            mt-2
-            truncate
-            text-sm
-            font-medium
-            text-white
-            "
-          >
-            {user?.email}
+          <p className="mt-2 text-sm text-stone-300">
+            لخدمات المعتمرين والزوار
           </p>
         </div>
+
+        {/* Navigation */}
+        <nav className="space-y-3">
+          {navItems.map((item) => {
+            const Icon = item.icon;
+
+            const isActive =
+              pathname === item.href || pathname.startsWith(item.href + "/");
+
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`
+                group
+                flex
+                items-center
+                gap-4
+                rounded-2xl
+                px-5
+                py-4
+                transition-all
+                duration-300
+
+                ${
+                  isActive
+                    ? "bg-amber-500 text-white shadow-lg"
+                    : "text-stone-200 hover:bg-[#3B3025]"
+                }
+              `}
+              >
+                <Icon
+                  size={22}
+                  className={
+                    isActive
+                      ? "text-white"
+                      : "text-amber-400 group-hover:text-amber-300"
+                  }
+                />
+
+                <span className="text-[15px] font-medium">{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
+
+      {/* User */}
+      <div>
+        <p className="mt-2 truncate text-sm font-medium text-white">
+          {user?.email}
+        </p>
 
         <button
           onClick={handleLogout}
           className="
+          mt-4
           flex
           w-full
           items-center
@@ -188,7 +129,7 @@ export default function Sidebar({ user }: { user: any }) {
           text-white
           transition
           hover:bg-red-600
-          "
+        "
         >
           <LogOut size={18} />
           تسجيل الخروج
