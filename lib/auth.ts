@@ -15,7 +15,7 @@ const getBaseURL = () => {
     return process.env.V0_RUNTIME_URL;
   }
   // Fallback for local development
-  return "http://localhost:3000";
+  return `${process.env.BETTER_AUTH_URL}`;
 };
 
 const getTrustedOrigins = () => {
