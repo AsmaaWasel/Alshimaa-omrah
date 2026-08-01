@@ -50,6 +50,27 @@
       "when": 1785516071212,
       "tag": "0006_outgoing_celestials",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1785577897097,
+      "tag": "0007_rapid_shiver_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1785583198524,
+      "tag": "0008_curvy_kang",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1785586252547,
+      "tag": "0009_sharp_secret_warriors",
+      "breakpoints": true
     }
   ]
 }

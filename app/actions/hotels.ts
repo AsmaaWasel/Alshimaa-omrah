@@ -85,16 +85,10 @@ export async function getHotelById(id: number) {
     .from(hotelVideos)
     .where(eq(hotelVideos.hotelId, id));
 
-  const features = await db
-    .select()
-    .from(hotelFeatures)
-    .where(eq(hotelFeatures.hotelId, id));
-
   return {
     ...hotel[0],
     images,
     videos,
-    features,
   };
 }
 
@@ -303,5 +297,17 @@ export async function addHotelVideo(data: {
     })
     .returning();
 
+  revalidatePath("/dashboard/hotels");
+
   return result[0];
+}
+
+export async function deleteHotelVideo(id: number) {
+  const userId = await getUserId();
+
+  await db
+    .delete(hotelVideos)
+    .where(and(eq(hotelVideos.id, id), eq(hotelVideos.userId, userId)));
+
+  revalidatePath("/dashboard/hotels");
 }

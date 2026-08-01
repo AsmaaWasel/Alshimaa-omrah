@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Upload } from "lucide-react";
+import { Upload, Video } from "lucide-react";
 import { createBus, updateBus } from "@/app/actions/buses";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -11,9 +11,15 @@ type Bus = {
   title: string;
   description?: string | null;
   busType: string;
+
   images?: {
     id?: number;
     imageUrl: string;
+  }[];
+
+  videos?: {
+    id?: number;
+    videoUrl: string;
   }[];
 };
 
@@ -26,14 +32,20 @@ export default function BusForm({ bus, onSubmit }: BusFormProps) {
   const router = useRouter();
 
   const [images, setImages] = useState<File[]>([]);
-
+  const [videos, setVideos] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const handleImages = (e: React.ChangeEvent<HTMLInputElement>) => {
+  function handleImages(e: React.ChangeEvent<HTMLInputElement>) {
     if (!e.target.files) return;
 
     setImages(Array.from(e.target.files));
-  };
+  }
+
+  function handleVideos(e: React.ChangeEvent<HTMLInputElement>) {
+    if (!e.target.files) return;
+
+    setVideos(Array.from(e.target.files));
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -51,14 +63,14 @@ export default function BusForm({ bus, onSubmit }: BusFormProps) {
         formData.append("images", image);
       });
 
+      videos.forEach((video) => {
+        formData.append("videos", video);
+      });
+
       if (onSubmit) {
         await onSubmit(formData);
       } else if (bus?.id) {
-        await updateBus(bus.id, {
-          title: formData.get("title") as string,
-          description: formData.get("description") as string,
-          busType: formData.get("busType") as string,
-        });
+        await updateBus(bus.id, formData);
       } else {
         await createBus(formData);
       }
@@ -83,18 +95,8 @@ export default function BusForm({ bus, onSubmit }: BusFormProps) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="
-      space-y-6
-      bg-white
-      p-6
-      rounded-xl
-      shadow
-      "
-    >
+    <form onSubmit={handleSubmit} className="space-y-6">
       {/* اسم الباص */}
-
       <div>
         <label className="block mb-2 font-semibold">اسم الباص</label>
 
@@ -112,27 +114,7 @@ export default function BusForm({ bus, onSubmit }: BusFormProps) {
         />
       </div>
 
-      {/* الوصف */}
-
-      <div>
-        <label className="block mb-2 font-semibold">شرح الباص</label>
-
-        <textarea
-          name="description"
-          defaultValue={bus?.description || ""}
-          placeholder="اكتب تفاصيل الباص والخدمات..."
-          rows={5}
-          className="
-          w-full
-          rounded-lg
-          border
-          p-3
-          "
-        />
-      </div>
-
       {/* نوع الباص */}
-
       <div>
         <label className="block mb-2 font-semibold">نوع الباص</label>
 
@@ -155,8 +137,25 @@ export default function BusForm({ bus, onSubmit }: BusFormProps) {
         </select>
       </div>
 
-      {/* الصور */}
+      {/* الوصف */}
+      <div>
+        <label className="block mb-2 font-semibold">شرح الباص</label>
 
+        <textarea
+          name="description"
+          defaultValue={bus?.description || ""}
+          placeholder="اكتب تفاصيل الباص والخدمات..."
+          rows={5}
+          className="
+          w-full
+          rounded-lg
+          border
+          p-3
+          "
+        />
+      </div>
+
+      {/* الصور */}
       <div>
         <label className="block mb-2 font-semibold">صور الباص</label>
 
@@ -186,10 +185,50 @@ export default function BusForm({ bus, onSubmit }: BusFormProps) {
         </label>
 
         {images.length > 0 && (
-          <div className="mt-4 space-y-2">
+          <div className="mt-3 space-y-1">
             {images.map((image) => (
               <p key={image.name} className="text-sm text-gray-600">
                 {image.name}
+              </p>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* الفيديوهات */}
+      <div>
+        <label className="block mb-2 font-semibold">فيديوهات الباص</label>
+
+        <label
+          className="
+          flex
+          cursor-pointer
+          items-center
+          gap-3
+          rounded-lg
+          border
+          p-4
+          hover:bg-gray-50
+          "
+        >
+          <Video size={20} />
+
+          <span>اختر فيديوهات</span>
+
+          <input
+            type="file"
+            accept="video/*"
+            multiple
+            hidden
+            onChange={handleVideos}
+          />
+        </label>
+
+        {videos.length > 0 && (
+          <div className="mt-3 space-y-1">
+            {videos.map((video) => (
+              <p key={video.name} className="text-sm text-gray-600">
+                {video.name}
               </p>
             ))}
           </div>

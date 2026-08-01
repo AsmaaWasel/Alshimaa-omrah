@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Trash2, Upload } from "lucide-react";
 import { addBusImage, deleteBusImage } from "@/app/actions/buses";
 
@@ -34,6 +33,7 @@ export default function BusImagesManager({
         const formData = new FormData();
 
         formData.append("file", file);
+        formData.append("type", "image");
 
         const res = await fetch("/api/upload", {
           method: "POST",
@@ -134,16 +134,14 @@ export default function BusImagesManager({
               rounded-xl
               "
             >
-              <Image
+              <img
                 src={image.imageUrl}
                 alt="bus"
-                width={300}
-                height={200}
                 className="
-                h-48
-                w-full
-                object-cover
-                "
+  h-48
+  w-full
+  object-cover
+  "
               />
 
               <button

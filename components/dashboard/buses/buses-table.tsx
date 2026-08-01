@@ -3,6 +3,7 @@
 import { Pencil } from "lucide-react";
 import BusActions from "./bus-actions";
 import { useRouter } from "next/navigation";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,10 +20,15 @@ type Bus = {
   id: number;
   title: string;
   description?: string | null;
-  busType: string;
+
   images: {
     id: number;
     imageUrl: string;
+  }[];
+
+  videos: {
+    id: number;
+    videoUrl: string;
   }[];
 };
 
@@ -34,17 +40,17 @@ export default function BusesTable({ buses }: Props) {
   const router = useRouter();
 
   return (
-    <div className="overflow-hidden rounded-xl bg-white shadow">
+    <div className="overflow-x-auto">
       <table className="w-full text-right">
-        <thead className="bg-gray-50 border-b">
-          <tr>
+        <thead>
+          <tr className="border-b bg-gray-50">
             <th className="p-4">اسم الباص</th>
 
             <th className="p-4">شرح الباص</th>
 
-            <th className="p-4">نوع الباص</th>
+            <th className="p-4">الصور</th>
 
-            <th className="p-4">عدد الصور</th>
+            <th className="p-4">الفيديوهات</th>
 
             <th className="p-4">الإجراءات</th>
           </tr>
@@ -68,15 +74,6 @@ export default function BusesTable({ buses }: Props) {
                   <p className="line-clamp-2 text-gray-600">
                     {bus.description || "لا يوجد شرح"}
                   </p>
-                </td>
-
-                {/* النوع */}
-                <td className="p-4">
-                  {bus.busType === "vip" && "VIP"}
-
-                  {bus.busType === "economic" && "اقتصادي"}
-
-                  {!["vip", "economic"].includes(bus.busType) && bus.busType}
                 </td>
 
                 {/* الصور */}
@@ -127,11 +124,44 @@ export default function BusesTable({ buses }: Props) {
                   </p>
                 </td>
 
+                {/* الفيديوهات */}
+                <td className="p-4">
+                  <button
+                    onClick={() =>
+                      router.push(`/dashboard/buses/${bus.id}/videos`)
+                    }
+                    className="
+                    flex
+                    items-center
+                    justify-center
+                    w-16
+                    h-12
+                    rounded-lg
+                    bg-gray-100
+                    hover:bg-gray-200
+                    transition
+                    "
+                  >
+                    🎥
+                  </button>
+
+                  <p className="text-sm text-gray-500 mt-2">
+                    {bus.videos.length} فيديو
+                  </p>
+                </td>
+
                 {/* Actions */}
                 <td className="p-4">
                   <div className="flex gap-3">
                     <AlertDialog>
-                      <AlertDialogTrigger className="rounded-lg p-2 text-blue-600 hover:bg-blue-50">
+                      <AlertDialogTrigger
+                        className="
+                        rounded-lg
+                        p-2
+                        text-blue-600
+                        hover:bg-blue-50
+                        "
+                      >
                         <Pencil size={18} />
                       </AlertDialogTrigger>
 
@@ -156,7 +186,10 @@ export default function BusesTable({ buses }: Props) {
                             onClick={() =>
                               router.push(`/dashboard/buses/${bus.id}/edit`)
                             }
-                            className="bg-blue-600 hover:bg-blue-700"
+                            className="
+                            bg-blue-600
+                            hover:bg-blue-700
+                            "
                           >
                             تعديل
                           </AlertDialogAction>

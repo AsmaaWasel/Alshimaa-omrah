@@ -11,19 +11,33 @@ export default async function EditHotelPage({
 }) {
   const { id } = await params;
 
+  const hotelId = Number(id);
+
   const hotel = await db.query.hotels.findFirst({
-    where: eq(hotels.id, Number(id)),
+    where: eq(hotels.id, hotelId),
   });
 
   if (!hotel) {
-    return <div className="p-6">الفندق غير موجود</div>;
+    return <div>الفندق غير موجود</div>;
+  }
+
+  async function handleUpdate(formData: FormData) {
+    "use server";
+
+    await updateHotel(hotelId, {
+      name: formData.get("name") as string,
+      description: formData.get("description") as string,
+      location: formData.get("location") as string,
+      stars: Number(formData.get("stars")),
+      packageType: formData.get("packageType") as "vip" | "economic",
+    });
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">تعديل الفندق</h1>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold">تعديل الفندق</h1>
 
-      <HotelForm initialData={hotel} onSubmit={updateHotel} />
+      <HotelForm initialData={hotel} onSubmit={handleUpdate} />
     </div>
   );
 }

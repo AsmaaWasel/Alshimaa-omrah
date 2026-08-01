@@ -15,10 +15,9 @@ type Hotel = {
 };
 
 type HotelFormProps = {
-  onSubmit?: (data: FormData) => Promise<void> | void;
-  initialData?: Hotel;
+  initialData?: any;
+  onSubmit?: (data: FormData) => Promise<void>;
 };
-
 export default function HotelForm({ onSubmit, initialData }: HotelFormProps) {
   const [images, setImages] = useState<File[]>([]);
   const [videos, setVideos] = useState<File[]>([]);
