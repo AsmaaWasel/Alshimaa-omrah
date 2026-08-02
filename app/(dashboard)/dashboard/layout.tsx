@@ -19,16 +19,16 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="flex min-h-screen bg-stone-50">
+    <div className="flex min-h-screen overflow-x-auto bg-stone-100">
       {/* Sidebar */}
       <Sidebar user={session.user} />
 
       {/* Content */}
       <div
         className="
-         mr-64
+          mr-64
           flex
-          min-w-0
+          min-w-[900px]
           flex-1
           flex-col
         "
@@ -43,7 +43,7 @@ export default async function DashboardLayout({
             md:p-8
           "
         >
-          <div className="mx-auto w-full max-w-7xl">
+          <div className="w-full">
             <div
               className="
                 rounded-3xl
