@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   FaInstagram,
@@ -8,15 +7,10 @@ import {
   FaFacebookF,
   FaSnapchatGhost,
 } from "react-icons/fa";
+import { CalendarDays, MessageCircle } from "lucide-react";
+import JourneyTimeline from "./ui/JourneyTimeline";
 
 export default function Hero() {
-  const scrollToPrograms = () => {
-    const element = document.getElementById("programs");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const scrollToBooking = () => {
     const element = document.getElementById("booking");
 
@@ -29,163 +23,338 @@ export default function Hero() {
   };
 
   return (
-    <>
-      <section
-        id="hero"
-        className="relative min-h-screen flex items-center overflow-hidden bg-background"
-      >
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/haram.png"
-            alt="الحرم الشريف"
-            fill
-            className="object-cover"
-            quality={100}
-          />
+    <section
+      id="hero"
+      className="relative overflow-hidden bg-[#101117]"
+      dir="rtl"
+    >
+      {/* ================= Background Decorations ================= */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute right-[-180px] top-[-180px] h-[450px] w-[450px] rounded-full bg-[#d4af37]/5 blur-3xl" />
 
-          <div className="absolute inset-0 bg-gradient-to-r from-[#2f241d]/80 via-[#2f241d]/50 to-transparent" />
+        <div className="absolute bottom-[-200px] left-[-150px] h-[400px] w-[400px] rounded-full bg-[#0e4138]/20 blur-3xl" />
+      </div>
 
-          <div className="absolute inset-0 bg-black/20" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-32">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Text Content */}
-            <div>
-              <motion.h1
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white drop-shadow-lg"
-              >
-                قافلة الشيماء
-                <span className="block text-accent mt-2 text-3xl md:text-4xl">
-                  لخدمات المعتمرين والزوار
-                </span>
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="text-lg md:text-2xl mb-8 text-white/95 leading-relaxed max-w-2xl"
-              >
-                حملات عمرة من الرياض إلى مكة المكرمة والمدينة المنورة يوميًا
-                للحملات الاقتصادية، ويومي{" "}
-                <span className="font-bold text-accent">الاثنين والخميس</span>{" "}
-                لحملات
-                <span className="font-bold text-accent"> VIP</span>. نوفر رحلات
-                متكاملة تشمل النقل بباصات حديثة ومريحة، والإقامة في فنادق 3 و5
-                نجوم، مع الذهاب والعودة من وإلى الرياض.
-              </motion.p>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
-                className="flex flex-wrap gap-4 mt-8"
-              >
-                <button
-                  onClick={scrollToPrograms}
-                  className="border border-white/40 backdrop-blur-md bg-white/10 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition-all duration-300"
-                >
-                  تصفح الباقات
-                </button>
-                <button
-                  onClick={scrollToBooking}
-                  className="bg-[#D9B8A6] text-[#2F2A25] px-8 py-4 rounded-full font-bold shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  احجز رحلتك الآن
-                </button>
-                <a
-                  href="https://wa.me/966563591198"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border border-white/40 backdrop-blur-md bg-white/10 text-white px-8 py-4 rounded-full font-bold hover:bg-white/20 transition-all duration-300"
-                >
-                  تواصل عبر واتساب
-                </a>
-              </motion.div>
-            </div>
-
-            {/* Stats */}
+      <div className="relative mx-auto max-w-[1200px] px-6 py-20 lg:py-24">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+          {/* =====================================================
+              Right Side - Main Content
+          ====================================================== */}
+          <div className="order-1 text-right">
+            {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="hidden md:flex flex-col gap-5"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="mb-7 inline-flex items-center gap-3 rounded-full border border-[#66551b] bg-[#101117] px-5 py-2"
+            >
+              <span className="h-2 w-2 rounded-full bg-[#e0b936]" />
+
+              <span className="text-sm font-medium text-[#e0b936]">
+                قافلة الشيماء · خدمات المعتمرين والزوار
+              </span>
+            </motion.div>
+
+            {/* Heading */}
+            <motion.h1
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+              className="
+                max-w-[700px]
+                text-4xl
+                font-extrabold
+                leading-[1.4]
+                text-[#f5f1e7]
+                sm:text-5xl
+                lg:text-[54px]
+              "
+            >
+              <span className="text-[#e1bb3f]">رحلتك إلى بيت الله الحرام</span>
+
+              <br />
+
+              <span>تبدأ من الرياض</span>
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="
+                mt-7
+                max-w-[680px]
+                text-base
+                leading-8
+                text-[#ded9cf]
+                sm:text-lg
+                sm:leading-9
+              "
+            >
+              حملات عمرة من الرياض إلى مكة المكرمة والمدينة المنورة يوميًا
+              للحملات الاقتصادية، ويومي{" "}
+              <span className="font-bold text-[#e1bb3f]">الاثنين والخميس</span>{" "}
+              لحملات <span className="font-bold text-[#e1bb3f]">VIP</span>
+              .
+              <br />
+              نوفر رحلات متكاملة تشمل النقل بباصات حديثة ومريحة، والإقامة في
+              فنادق 3 و5 نجوم، مع الذهاب والعودة من وإلى الرياض.
+            </motion.p>
+
+            {/* ================= Buttons ================= */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.45 }}
+              className="mt-9 flex flex-wrap items-center justify-start gap-4"
+            >
+              {/* Primary */}
+              <button
+                onClick={scrollToBooking}
+                className="
+                  flex
+                  min-h-[62px]
+                  items-center
+                  justify-center
+                  gap-3
+                  bg-[#d4af37]
+                  px-8
+                  font-bold
+                  text-[#111217]
+                  transition
+                  hover:bg-[#e2c34f]
+                "
+              >
+                <span>احجز رحلتك الآن</span>
+
+                <CalendarDays size={19} />
+              </button>
+
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/966563591198"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  flex
+                  min-h-[62px]
+                  items-center
+                  justify-center
+                  gap-3
+                  border
+                  border-[#5e5c62]
+                  px-8
+                  font-bold
+                  text-white
+                  transition
+                  hover:border-[#d4af37]
+                  hover:text-[#d4af37]
+                "
+              >
+                <span>تحدث معنا مباشرة</span>
+
+                <MessageCircle size={19} />
+              </a>
+            </motion.div>
+
+            {/* ================= Features ================= */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.55 }}
+              className="
+                mt-8
+                flex
+                flex-wrap
+                justify-start
+                gap-x-6
+                gap-y-3
+                text-sm
+                text-[#9d988d]
+              "
+            >
+              <span className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+                حجز آمن ومؤكد
+              </span>
+
+              <span className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+                دعم عبر واتساب 24 ساعة
+              </span>
+
+              <span className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+                مواعيد انطلاق ثابتة
+              </span>
+            </motion.div>
+
+            {/* ================= Stats ================= */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.65 }}
+              className="
+                mt-10
+                grid
+                grid-cols-2
+                gap-3
+                sm:grid-cols-4
+              "
             >
               {[
                 { number: "+15", label: "سنة خبرة" },
                 { number: "+50,000", label: "معتمر ومعتمرة" },
                 { number: "4.9", label: "تقييم العملاء" },
-                { number: "٪100", label: "رحلات مضمونة" },
-              ].map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 + i * 0.15 }}
-                  className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl px-6 py-4 shadow-xl flex items-center gap-4 self-end w-fit"
+                { number: "100٪", label: "رحلات مضمونة" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="
+                    border
+                    border-[#35363d]
+                    bg-[#18191f]
+                    px-3
+                    py-4
+                    text-center
+                  "
                 >
-                  <span className="text-3xl md:text-4xl font-bold text-accent">
+                  <div className="text-xl font-bold text-[#e0b936] sm:text-2xl">
                     {stat.number}
-                  </span>
-                  <span className="text-white/90 font-medium text-sm md:text-base">
+                  </div>
+
+                  <div className="mt-1 text-xs text-[#9d988d] sm:text-sm">
                     {stat.label}
-                  </span>
-                </motion.div>
+                  </div>
+                </div>
               ))}
+            </motion.div>
+
+            {/* ================= Social Media ================= */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.75 }}
+              className="mt-8"
+            >
+              <p className="mb-4 text-sm font-medium text-[#9d988d]">
+                تابعنا على منصات التواصل
+              </p>
+
+              <div className="flex items-center justify-start gap-3">
+                {/* Facebook */}
+                <a
+                  href="https://www.facebook.com/share/1BgfTwUvr2/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    border
+                    border-[#3a3b42]
+                    bg-[#18191f]
+                    text-white
+                    transition
+                    hover:border-[#d4af37]
+                    hover:text-[#d4af37]
+                  "
+                >
+                  <FaFacebookF size={18} />
+                </a>
+
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/qafila_alsyhmaa_likedemati_mut"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    border
+                    border-[#3a3b42]
+                    bg-[#18191f]
+                    text-white
+                    transition
+                    hover:border-[#d4af37]
+                    hover:text-[#d4af37]
+                  "
+                >
+                  <FaInstagram size={19} />
+                </a>
+
+                {/* TikTok */}
+                <a
+                  href="https://www.tiktok.com/@alshimaa_makah"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    border
+                    border-[#3a3b42]
+                    bg-[#18191f]
+                    text-white
+                    transition
+                    hover:border-[#d4af37]
+                    hover:text-[#d4af37]
+                  "
+                >
+                  <FaTiktok size={18} />
+                </a>
+
+                {/* Snapchat */}
+                <a
+                  href="https://www.snapchat.com/@eidalgzar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Snapchat"
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    border
+                    border-[#3a3b42]
+                    bg-[#18191f]
+                    text-white
+                    transition
+                    hover:border-[#d4af37]
+                    hover:text-[#d4af37]
+                  "
+                >
+                  <FaSnapchatGhost size={19} />
+                </a>
+              </div>
             </motion.div>
           </div>
 
-          <p className="text-white/80 text-sm font-medium mt-8 mb-3">
-            تابعنا على منصات التواصل
-          </p>
+          {/* =====================================================
+              Left Side - Journey
+          ====================================================== */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex items-center gap-4 mt-8"
+            initial={{ opacity: 0, x: -40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="order-2 flex justify-center lg:justify-start"
           >
-            <a
-              href="https://www.facebook.com/share/1BgfTwUvr2/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-blue-600 hover:scale-110 transition-all duration-300 shadow-lg"
-            >
-              <FaFacebookF className="text-white text-2xl group-hover:scale-110 transition-transform" />
-            </a>
-            <a
-              href="https://www.instagram.com/qafila_alsyhmaa_likedemati_mut"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-gradient-to-br hover:from-pink-500 hover:to-orange-400 hover:scale-110 transition-all duration-300 shadow-lg"
-            >
-              <FaInstagram className="text-white text-2xl group-hover:scale-110 transition-transform" />
-            </a>
-
-            <a
-              href="https://www.tiktok.com/@alshimaa_makah?_r=1&_t=ZS-97L5QAYAryS"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-black hover:scale-110 transition-all duration-300 shadow-lg"
-            >
-              <FaTiktok className="text-white text-2xl group-hover:scale-110 transition-transform" />
-            </a>
-
-            <a
-              href="https://www.snapchat.com/@eidalgzar?share_id=3xutvJmu2p4&locale=ar-AE"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center hover:bg-yellow-400 hover:scale-110 transition-all duration-300 shadow-lg"
-            >
-              <FaSnapchatGhost className="text-white text-2xl group-hover:scale-110 transition-transform" />
-            </a>
+            <JourneyTimeline />
           </motion.div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

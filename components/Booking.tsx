@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { JSX, useState } from "react";
 import { motion } from "framer-motion";
 import {
   User,
@@ -10,10 +10,22 @@ import {
   BedDouble,
   Bus,
   Send,
+  ShieldCheck,
 } from "lucide-react";
 
-export default function BookingSection() {
-  const [formData, setFormData] = useState({
+type FormData = {
+  name: string;
+  phone: string;
+  pilgrims: string;
+  seats: string;
+  date: string;
+  notes: string;
+};
+
+const WHATSAPP_NUMBER = "966563591198";
+
+export default function BookingSection(): JSX.Element {
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     phone: "",
     pilgrims: "",
@@ -22,7 +34,14 @@ export default function BookingSection() {
     notes: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (field: keyof FormData, value: string): void => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     const message = `
@@ -39,260 +58,500 @@ export default function BookingSection() {
 التاريخ المفضل: ${formData.date}
 
 ملاحظات:
-${formData.notes}
+${formData.notes || "لا توجد ملاحظات"}
 `;
 
-    const whatsappUrl = `https://wa.me/966563591198?text=${encodeURIComponent(
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
       message,
     )}`;
 
-    window.open(whatsappUrl, "_blank");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
     <section
       id="booking"
-      className="relative py-24 bg-gradient-to-b from-[#fbf9f5] to-white overflow-hidden"
+      dir="rtl"
+      className="relative overflow-hidden bg-[#F8F6F1] py-20 md:py-28"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(200,164,77,.08),transparent_60%)]" />
+      {/* ================================================= */}
+      {/* ================= BACKGROUND ==================== */}
+      {/* ================================================= */}
 
-      <div className="relative max-w-7xl mx-auto px-6">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute right-[-120px] top-[-100px] h-[400px] w-[400px] rounded-full bg-[#D4AF37]/[0.06] blur-[120px]" />
+
+        <div className="absolute bottom-[-150px] left-[-120px] h-[400px] w-[400px] rounded-full bg-[#096B50]/[0.06] blur-[120px]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        {/* ================================================= */}
+        {/* ===================== HEADER ==================== */}
+        {/* ================================================= */}
+
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+          }}
+          transition={{
+            duration: 0.6,
+          }}
+          className="mx-auto mb-14 max-w-3xl text-center md:mb-16"
         >
-          <span className="inline-flex rounded-full bg-[#c8a44d]/10 px-5 py-2 font-semibold text-[#c8a44d]">
+          <span className="inline-flex items-center gap-2 border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-5 py-2 text-xs font-bold text-[#9C7A16] md:text-sm">
+            <CalendarDays size={16} />
             احجز الآن
           </span>
 
-          <h2 className="mt-6 text-5xl font-black text-[#2F2A25]">
+          <h2 className="mt-6 text-3xl font-black text-[#202126] sm:text-4xl md:text-5xl">
             احجز رحلة العمر
           </h2>
 
-          <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto leading-8">
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-8 text-[#6F6F72] md:text-lg">
             املأ البيانات التالية وسيتواصل معك فريق قافلة الشيماء لتأكيد الحجز
             والإجابة على جميع استفساراتك.
           </p>
         </motion.div>
 
+        {/* ================================================= */}
+        {/* ================= MAIN CONTENT ================== */}
+        {/* ================================================= */}
+
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid lg:grid-cols-2 gap-12"
+          initial={{
+            opacity: 0,
+            y: 40,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.1,
+          }}
+          transition={{
+            duration: 0.7,
+          }}
+          className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10"
         >
-          {/* معلومات */}
-          <div className="bg-[#2F2A25] rounded-[32px] p-10 text-white">
-            <h3 className="text-3xl font-bold mb-8">لماذا تحجز معنا؟</h3>
+          {/* ================================================= */}
+          {/* ================= INFO CARD ===================== */}
+          {/* ================================================= */}
 
-            <div className="space-y-6">
-              <div className="flex gap-4">
-                <Bus className="text-[#c8a44d]" />
-                <div>
-                  <h4 className="font-bold">باصات حديثة</h4>
-                  <p className="text-white/70 mt-1">
-                    موديلات حديثة مجهزة بأعلى وسائل الراحة.
-                  </p>
+          <div className="relative overflow-hidden bg-[#202126] p-7 text-white shadow-[0_20px_60px_rgba(32,33,38,0.14)] md:p-10">
+            {/* Golden line */}
+
+            <div className="absolute right-0 left-0 top-0 h-[2px] bg-gradient-to-l from-transparent via-[#D4AF37] to-transparent" />
+
+            {/* Glow */}
+
+            <div className="pointer-events-none absolute right-[-100px] top-[-100px] h-[280px] w-[280px] rounded-full bg-[#D4AF37]/10 blur-[90px]" />
+
+            <div className="relative">
+              <span className="text-sm font-bold text-[#D4AF37]">
+                قافلة الشيماء
+              </span>
+
+              <h3 className="mt-4 text-2xl font-black md:text-3xl">
+                لماذا تحجز معنا؟
+              </h3>
+
+              <div className="mt-5 h-[2px] w-14 bg-[#D4AF37]" />
+
+              {/* Features */}
+
+              <div className="mt-9 space-y-7">
+                {/* Bus */}
+
+                <div className="flex gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]">
+                    <Bus size={21} />
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-white">باصات حديثة</h4>
+
+                    <p className="mt-1 text-sm leading-7 text-[#B8B8BD]">
+                      موديلات حديثة مجهزة بأعلى وسائل الراحة والسلامة للمعتمرين.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Hotel */}
+
+                <div className="flex gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]">
+                    <BedDouble size={21} />
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-white">فنادق مميزة</h4>
+
+                    <p className="mt-1 text-sm leading-7 text-[#B8B8BD]">
+                      خيارات إقامة متنوعة تشمل الفنادق الاقتصادية وVIP.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Calendar */}
+
+                <div className="flex gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]">
+                    <CalendarDays size={21} />
+                  </div>
+
+                  <div>
+                    <h4 className="font-black text-white">رحلات منتظمة</h4>
+
+                    <p className="mt-1 text-sm leading-7 text-[#B8B8BD]">
+                      رحلات اقتصادية بشكل يومي وVIP يومي الاثنين والخميس.
+                    </p>
+                  </div>
                 </div>
               </div>
 
-              <div className="flex gap-4">
-                <BedDouble className="text-[#c8a44d]" />
+              {/* Note */}
 
-                <div>
-                  <h4 className="font-bold">فنادق مميزة</h4>
+              <div className="mt-10 border border-[#096B50]/40 bg-[#096B50]/10 p-5">
+                <div className="flex gap-3">
+                  <ShieldCheck
+                    size={21}
+                    className="mt-1 shrink-0 text-[#31B894]"
+                  />
 
-                  <p className="text-white/70 mt-1">
-                    إقامة بفنادق 3 و5 نجوم بالقرب من الحرم.
+                  <p className="text-sm leading-7 text-[#C9C9CD]">
+                    بعد إرسال طلب الحجز سيتم التواصل معك مباشرة لتأكيد الموعد
+                    والمقاعد وإرسال جميع تفاصيل الرحلة.
                   </p>
                 </div>
               </div>
-
-              <div className="flex gap-4">
-                <CalendarDays className="text-[#c8a44d]" />
-
-                <div>
-                  <h4 className="font-bold">رحلات منتظمة</h4>
-
-                  <p className="text-white/70 mt-1">
-                    رحلات اقتصادية يوميًا وVIP يومي الاثنين والخميس.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-10 rounded-2xl bg-white/10 p-6">
-              <p className="leading-8 text-white/80">
-                بعد إرسال الطلب سيتم التواصل معك مباشرة لتأكيد الحجز وإرسال جميع
-                التفاصيل الخاصة بالرحلة.
-              </p>
             </div>
           </div>
 
-          {/* الفورم */}
+          {/* ================================================= */}
+          {/* ===================== FORM ====================== */}
+          {/* ================================================= */}
 
           <form
             onSubmit={handleSubmit}
-            className="bg-white rounded-[32px] shadow-xl border border-[#ece7dc] p-10"
+            className="border border-[#E4DFD5] bg-white p-6 shadow-[0_15px_50px_rgba(32,33,38,0.07)] md:p-9 lg:p-10"
           >
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="mb-8">
+              <h3 className="text-2xl font-black text-[#202126]">
+                بيانات الحجز
+              </h3>
+
+              <p className="mt-2 text-sm text-[#77787D]">
+                أدخل بياناتك وسنتواصل معك عبر واتساب.
+              </p>
+
+              <div className="mt-4 h-[2px] w-12 bg-[#D4AF37]" />
+            </div>
+
+            {/* ================= ROW 1 ================= */}
+
+            <div className="grid gap-5 md:grid-cols-2">
               {/* الاسم */}
+
               <div>
-                <label className="font-semibold mb-2 block">الاسم</label>
+                <label
+                  htmlFor="booking-name"
+                  className="mb-2 block text-sm font-bold text-[#202126]"
+                >
+                  الاسم بالكامل
+                </label>
 
                 <div className="relative">
                   <User
-                    className="absolute right-4 top-4 text-gray-400"
-                    size={20}
+                    size={19}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8A8E]"
                   />
 
                   <input
+                    id="booking-name"
                     required
                     type="text"
-                    placeholder="الاسم بالكامل"
+                    placeholder="اكتب اسمك بالكامل"
                     value={formData.name}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        name: e.target.value,
-                      })
-                    }
-                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                    onChange={(e) => handleChange("name", e.target.value)}
+                    className="
+                      w-full
+                      border
+                      border-[#E2DED6]
+                      bg-[#FCFBF8]
+                      py-3.5
+                      pr-12
+                      pl-4
+                      text-sm
+                      text-[#202126]
+                      outline-none
+                      transition
+                      placeholder:text-[#A0A0A4]
+                      focus:border-[#096B50]
+                      focus:ring-2
+                      focus:ring-[#096B50]/10
+                    "
                   />
                 </div>
               </div>
 
               {/* الجوال */}
+
               <div>
-                <label className="font-semibold mb-2 block">الجوال</label>
+                <label
+                  htmlFor="booking-phone"
+                  className="mb-2 block text-sm font-bold text-[#202126]"
+                >
+                  رقم الجوال
+                </label>
 
                 <div className="relative">
                   <Phone
-                    className="absolute right-4 top-4 text-gray-400"
-                    size={20}
+                    size={19}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8A8E]"
                   />
 
                   <input
+                    id="booking-phone"
                     required
                     dir="ltr"
                     type="tel"
                     placeholder="+966 5xxxxxxxx"
                     value={formData.phone}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        phone: e.target.value,
-                      })
-                    }
-                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                    onChange={(e) => handleChange("phone", e.target.value)}
+                    className="
+                      w-full
+                      border
+                      border-[#E2DED6]
+                      bg-[#FCFBF8]
+                      py-3.5
+                      pr-12
+                      pl-4
+                      text-sm
+                      text-[#202126]
+                      outline-none
+                      transition
+                      placeholder:text-[#A0A0A4]
+                      focus:border-[#096B50]
+                      focus:ring-2
+                      focus:ring-[#096B50]/10
+                    "
                   />
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mt-6">
+            {/* ================= ROW 2 ================= */}
+
+            <div className="mt-5 grid gap-5 md:grid-cols-2">
               {/* عدد المعتمرين */}
+
               <div>
-                <label className="font-semibold mb-2 block">
+                <label
+                  htmlFor="booking-pilgrims"
+                  className="mb-2 block text-sm font-bold text-[#202126]"
+                >
                   عدد المعتمرين
                 </label>
 
                 <div className="relative">
                   <Users
-                    className="absolute right-4 top-4 text-gray-400"
-                    size={20}
+                    size={19}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8A8E]"
                   />
 
                   <input
+                    id="booking-pilgrims"
                     required
+                    min="1"
                     type="number"
                     placeholder="عدد الأشخاص"
                     value={formData.pilgrims}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        pilgrims: e.target.value,
-                      })
-                    }
-                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                    onChange={(e) => handleChange("pilgrims", e.target.value)}
+                    className="
+                      w-full
+                      border
+                      border-[#E2DED6]
+                      bg-[#FCFBF8]
+                      py-3.5
+                      pr-12
+                      pl-4
+                      text-sm
+                      text-[#202126]
+                      outline-none
+                      transition
+                      focus:border-[#096B50]
+                      focus:ring-2
+                      focus:ring-[#096B50]/10
+                    "
                   />
                 </div>
               </div>
 
               {/* المقاعد */}
+
               <div>
-                <label className="font-semibold mb-2 block">
+                <label
+                  htmlFor="booking-seats"
+                  className="mb-2 block text-sm font-bold text-[#202126]"
+                >
                   عدد المقاعد في الباص
                 </label>
 
                 <div className="relative">
                   <Bus
-                    className="absolute right-4 top-4 text-gray-400"
-                    size={20}
+                    size={19}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8A8E]"
                   />
 
                   <input
+                    id="booking-seats"
                     required
+                    min="1"
                     type="number"
                     placeholder="عدد المقاعد"
                     value={formData.seats}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        seats: e.target.value,
-                      })
-                    }
-                    className="w-full rounded-xl border border-gray-200 pr-12 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                    onChange={(e) => handleChange("seats", e.target.value)}
+                    className="
+                      w-full
+                      border
+                      border-[#E2DED6]
+                      bg-[#FCFBF8]
+                      py-3.5
+                      pr-12
+                      pl-4
+                      text-sm
+                      text-[#202126]
+                      outline-none
+                      transition
+                      focus:border-[#096B50]
+                      focus:ring-2
+                      focus:ring-[#096B50]/10
+                    "
                   />
                 </div>
               </div>
             </div>
 
-            {/* التاريخ */}
-            <div className="mt-6">
-              <label className="font-semibold mb-2 block">التاريخ المفضل</label>
+            {/* ================= DATE ================= */}
 
-              <input
-                required
-                type="date"
-                value={formData.date}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    date: e.target.value,
-                  })
-                }
-                className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
-              />
+            <div className="mt-5">
+              <label
+                htmlFor="booking-date"
+                className="mb-2 block text-sm font-bold text-[#202126]"
+              >
+                التاريخ المفضل للرحلة
+              </label>
+
+              <div className="relative">
+                <CalendarDays
+                  size={19}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#8A8A8E]"
+                />
+
+                <input
+                  id="booking-date"
+                  required
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => handleChange("date", e.target.value)}
+                  className="
+                    w-full
+                    border
+                    border-[#E2DED6]
+                    bg-[#FCFBF8]
+                    py-3.5
+                    pr-12
+                    pl-4
+                    text-sm
+                    text-[#202126]
+                    outline-none
+                    transition
+                    focus:border-[#096B50]
+                    focus:ring-2
+                    focus:ring-[#096B50]/10
+                  "
+                />
+              </div>
             </div>
 
-            {/* ملاحظات */}
-            <div className="mt-6">
-              <label className="font-semibold mb-2 block">ملاحظات</label>
+            {/* ================= NOTES ================= */}
+
+            <div className="mt-5">
+              <label
+                htmlFor="booking-notes"
+                className="mb-2 block text-sm font-bold text-[#202126]"
+              >
+                ملاحظات إضافية
+              </label>
 
               <textarea
+                id="booking-notes"
                 rows={5}
-                placeholder="اكتب أي تفاصيل إضافية..."
+                placeholder="اكتب أي تفاصيل أو طلبات إضافية..."
                 value={formData.notes}
-                onChange={(e) =>
-                  setFormData({
-                    ...formData,
-                    notes: e.target.value,
-                  })
-                }
-                className="w-full rounded-xl border border-gray-200 px-4 py-4 outline-none focus:border-[#c8a44d]"
+                onChange={(e) => handleChange("notes", e.target.value)}
+                className="
+                  w-full
+                  resize-none
+                  border
+                  border-[#E2DED6]
+                  bg-[#FCFBF8]
+                  px-4
+                  py-3.5
+                  text-sm
+                  text-[#202126]
+                  outline-none
+                  transition
+                  placeholder:text-[#A0A0A4]
+                  focus:border-[#096B50]
+                  focus:ring-2
+                  focus:ring-[#096B50]/10
+                "
               />
             </div>
+
+            {/* ================= SUBMIT ================= */}
 
             <button
               type="submit"
-              className="mt-8 w-full rounded-full bg-[#c8a44d] py-4 text-lg font-bold text-[#2F2A25] hover:scale-[1.02] transition flex items-center justify-center gap-2"
+              className="
+                mt-7
+                flex
+                w-full
+                items-center
+                justify-center
+                gap-2
+                bg-[#096B50]
+                px-6
+                py-4
+                text-base
+                font-black
+                text-white
+                shadow-[0_10px_30px_rgba(9,107,80,0.16)]
+                transition-all
+                duration-300
+                hover:-translate-y-0.5
+                hover:bg-[#075B44]
+                active:translate-y-0
+              "
             >
               إرسال طلب الحجز
-              <Send size={18} />
+              <Send size={19} />
             </button>
+
+            <p className="mt-4 text-center text-xs text-[#8A8A8E]">
+              سيتم فتح واتساب لإرسال بيانات الحجز إلى فريقنا.
+            </p>
           </form>
         </motion.div>
       </div>

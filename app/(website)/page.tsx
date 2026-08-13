@@ -8,12 +8,15 @@ import Booking from "@/components/Booking";
 import FAQ from "@/components/FAQ";
 import PackagesComparison from "@/components/PackagesComparsion";
 import PricesSection from "@/components/PricesSection";
+import StatsSection from "@/components/ui/StatusSection";
 
 export default function Page() {
   return (
     <main className="bg-background">
       <Hero />
+      <StatsSection />
       <Hotels />
+
       <EconomyServices />
       <Packages />
       <PackagesComparison />
