@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bus, Crown, ArrowLeft, Hotel, CalendarDays, Star } from "lucide-react";
+import {
+  Bus,
+  Crown,
+  ArrowLeft,
+  Hotel,
+  CalendarDays,
+  Star,
+} from "lucide-react";
 
 const packages = [
   {
@@ -41,7 +48,7 @@ const packages = [
     href: "#vip-services",
 
     from: "الرياض",
-    to: "مكة  فقط",
+    to: "مكة فقط",
     days: "الاثنين - الخميس",
     daysText: "مرتين أسبوعيًا",
 
@@ -122,41 +129,42 @@ export default function PackagesSection() {
     <section
       id="programs"
       dir="rtl"
-      className="relative overflow-hidden bg-[#101117] py-24 text-white"
+      className="relative overflow-hidden bg-[#101117] py-16 text-white sm:py-20 md:py-24"
     >
-      {/* Background glow */}
+      {/* ================= BACKGROUND ================= */}
+
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute right-[15%] top-0 h-[500px] w-[500px] rounded-full bg-[#c9a227]/5 blur-[120px]" />
 
         <div className="absolute bottom-0 left-[10%] h-[400px] w-[400px] rounded-full bg-[#c9a227]/5 blur-[120px]" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
+      <div className="relative mx-auto max-w-7xl px-3 sm:px-5 md:px-6">
         {/* ================= HEADER ================= */}
 
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mx-auto mb-16 max-w-3xl text-center"
+          className="mx-auto mb-10 max-w-3xl text-center sm:mb-14 md:mb-16"
         >
-          <span className="inline-flex rounded-full border border-[#c9a227]/40 bg-[#c9a227]/10 px-5 py-2 text-sm font-semibold text-[#d8b63d]">
+          <span className="inline-flex rounded-full border border-[#c9a227]/40 bg-[#c9a227]/10 px-4 py-1.5 text-xs font-semibold text-[#d8b63d] sm:px-5 sm:py-2 sm:text-sm">
             حملات العمرة
           </span>
 
-          <h2 className="mt-6 text-4xl font-black text-white md:text-5xl">
+          <h2 className="mt-5 text-3xl font-black text-white sm:text-4xl md:mt-6 md:text-5xl">
             تصفح الباقات
           </h2>
 
-          <p className="mt-5 text-base leading-8 text-[#aaaab0] md:text-lg">
-            باقتان واضحتان — الفرق بينهما في درجة الراحة ومواعيد الانطلاق، لا في
-            جودة الخدمة.
+          <p className="mt-4 px-2 text-sm leading-7 text-[#aaaab0] sm:text-base sm:leading-8 md:mt-5 md:text-lg">
+            باقتان واضحتان — الفرق بينهما في درجة الراحة ومواعيد الانطلاق، لا
+            في جودة الخدمة.
           </p>
         </motion.div>
 
         {/* ================= PACKAGES ================= */}
 
-        <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-2">
+        <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-2 lg:gap-8">
           {packages.map((item, index) => {
             const Icon = item.icon;
 
@@ -191,31 +199,31 @@ export default function PackagesSection() {
                 {/* ================= TICKET NOTCHES ================= */}
 
                 {/* Top notch */}
-                <div className="absolute -top-[14px] left-[25%] z-20 h-7 w-7 rounded-full bg-[#101117]" />
+                <div className="absolute -top-[14px] left-[20%] z-20 h-7 w-7 rounded-full bg-[#101117]" />
 
                 {/* Bottom notch */}
-                <div className="absolute -bottom-[14px] left-[25%] z-20 h-7 w-7 rounded-full bg-[#101117]" />
+                <div className="absolute -bottom-[14px] left-[20%] z-20 h-7 w-7 rounded-full bg-[#101117]" />
 
                 {/* Vertical dotted line */}
-                <div className="absolute bottom-0 left-[25%] top-0 border-l border-dashed border-[#c9a227]/40" />
+                <div className="absolute bottom-0 left-[20%] top-0 border-l border-dashed border-[#c9a227]/40" />
 
                 {/* ================= DATE SIDE ================= */}
 
-                <div className="absolute bottom-0 left-0 top-0 flex w-[25%] flex-col items-center justify-center px-3 text-center">
-                  <span className="mb-4 rotate-[-90deg] whitespace-nowrap text-xs text-[#8e8e95]">
+                <div className="absolute bottom-0 left-0 top-0 flex w-[20%] flex-col items-center justify-center px-1 text-center sm:px-2 md:px-3">
+                  <span className="mb-3 rotate-[-90deg] whitespace-nowrap text-[9px] text-[#8e8e95] sm:mb-4 sm:text-xs">
                     مواعيد الانطلاق
                   </span>
 
-                  <div className="mt-8">
-                    <p className="text-sm font-medium text-[#9999a1]">
+                  <div className="mt-6 sm:mt-8">
+                    <p className="text-[9px] font-medium text-[#9999a1] sm:text-sm">
                       {item.dateLabel}
                     </p>
 
-                    <h4 className="mt-2 text-base font-black text-white md:text-lg">
+                    <h4 className="mt-1 text-[10px] font-black text-white sm:mt-2 sm:text-base md:text-lg">
                       {item.dateValue}
                     </h4>
 
-                    <p className="mt-2 text-xs text-[#777780]">
+                    <p className="mt-1 text-[8px] text-[#777780] sm:mt-2 sm:text-xs">
                       {item.dateSub}
                     </p>
                   </div>
@@ -223,12 +231,12 @@ export default function PackagesSection() {
 
                 {/* ================= MAIN CONTENT ================= */}
 
-                <div className="mr-[25%] flex min-h-[540px] flex-col px-6 py-9 md:px-10">
+                <div className="mr-[20%] flex min-h-[540px] flex-col px-2 py-7 sm:px-4 sm:py-9 md:px-8">
                   {/* Badge */}
 
                   <div className="flex justify-start">
                     <span
-                      className={`rounded-full border px-4 py-2 text-xs font-bold ${
+                      className={`rounded-full border px-2.5 py-1.5 text-[9px] font-bold sm:px-4 sm:py-2 sm:text-xs ${
                         item.featured
                           ? "border-[#c9a227]/50 bg-[#c9a227]/10 text-[#d6b33b]"
                           : "border-[#17866c]/50 bg-[#116b58]/10 text-[#31b894]"
@@ -240,41 +248,47 @@ export default function PackagesSection() {
 
                   {/* Title */}
 
-                  <div className="mt-6 flex items-center justify-between gap-4">
-                    <div>
-                      <h3 className="text-2xl font-black text-white md:text-3xl">
+                  <div className="mt-4 flex items-center justify-between gap-2 sm:mt-6 sm:gap-4">
+                    <div className="min-w-0">
+                      <h3 className="text-base font-black leading-tight text-white sm:text-2xl md:text-3xl">
                         {item.title}
                       </h3>
                     </div>
 
                     <div
-                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full border ${
+                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border sm:h-12 sm:w-12 ${
                         item.featured
                           ? "border-[#c9a227]/50 bg-[#c9a227]/10 text-[#d6b33b]"
                           : "border-[#777]/30 bg-white/5 text-[#ddd]"
                       }`}
                     >
-                      <Icon size={22} />
+                      <Icon size={17} className="sm:h-[22px] sm:w-[22px]" />
                     </div>
                   </div>
 
                   {/* Route */}
 
-                  <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3">
-                    <div>
-                      <p className="text-sm text-[#9c9ca3]">من</p>
+                  <div className="mt-6 grid grid-cols-[1fr_auto_1fr] items-center gap-1.5 sm:mt-8 sm:gap-3">
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-[#9c9ca3] sm:text-sm">
+                        من
+                      </p>
 
-                      <h4 className="mt-2 text-base font-bold text-white md:text-lg">
+                      <h4 className="mt-1 truncate text-xs font-bold text-white sm:mt-2 sm:text-base md:text-lg">
                         {item.from}
                       </h4>
                     </div>
 
-                    <div className="text-xl text-[#d5ad27]">←</div>
+                    <div className="text-base text-[#d5ad27] sm:text-xl">
+                      ←
+                    </div>
 
-                    <div>
-                      <p className="text-sm text-[#9c9ca3]">إلى</p>
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-[#9c9ca3] sm:text-sm">
+                        إلى
+                      </p>
 
-                      <h4 className="mt-2 text-base font-bold text-white md:text-lg">
+                      <h4 className="mt-1 text-xs font-bold text-white sm:mt-2 sm:text-base md:text-lg">
                         {item.to}
                       </h4>
                     </div>
@@ -282,15 +296,15 @@ export default function PackagesSection() {
 
                   {/* Features */}
 
-                  <div className="mt-8 space-y-4">
+                  <div className="mt-6 space-y-3 sm:mt-8 sm:space-y-4">
                     {item.features.map((feature) => (
                       <div
                         key={feature}
-                        className="flex items-start gap-3 text-sm leading-6 text-[#dddde2] md:text-base"
+                        className="flex items-start gap-2 text-[10px] leading-5 text-[#dddde2] sm:gap-3 sm:text-sm sm:leading-6 md:text-base"
                       >
                         <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[#d4ad32]" />
 
-                        <span>{feature}</span>
+                        <span className="min-w-0">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -309,13 +323,13 @@ export default function PackagesSection() {
                     whileTap={{
                       scale: 0.98,
                     }}
-                    className="mt-7 flex w-full items-center justify-center gap-2 bg-[#d1a91f] px-5 py-4 text-sm font-black text-[#111217] transition-all duration-300 hover:bg-[#e3bd35]"
+                    className="mt-6 flex w-full items-center justify-center gap-1.5 bg-[#d1a91f] px-3 py-3 text-[10px] font-black text-[#111217] transition-all duration-300 hover:bg-[#e3bd35] sm:mt-7 sm:gap-2 sm:px-5 sm:py-4 sm:text-sm"
                   >
                     {item.button}
 
                     <ArrowLeft
-                      size={18}
-                      className="transition-transform duration-300 group-hover:-translate-x-1"
+                      size={15}
+                      className="transition-transform duration-300 group-hover:-translate-x-1 sm:h-[18px] sm:w-[18px]"
                     />
                   </motion.a>
                 </div>
@@ -338,9 +352,9 @@ export default function PackagesSection() {
           viewport={{
             once: true,
           }}
-          className="mt-24"
+          className="mt-16 sm:mt-20 md:mt-24"
         >
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:gap-5 md:grid-cols-2 lg:grid-cols-4">
             {highlights.map((item) => {
               const Icon = item.icon;
 
@@ -350,17 +364,20 @@ export default function PackagesSection() {
                   whileHover={{
                     y: -6,
                   }}
-                  className="border border-[#2e3039] bg-[#181a22] p-7 text-center transition-all duration-300 hover:border-[#c9a227]/40"
+                  className="border border-[#2e3039] bg-[#181a22] p-5 text-center transition-all duration-300 hover:border-[#c9a227]/40 sm:p-7"
                 >
-                  <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-[#c9a227]/30 bg-[#c9a227]/10">
-                    <Icon size={25} className="text-[#d4ae32]" />
+                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-[#c9a227]/30 bg-[#c9a227]/10 sm:h-14 sm:w-14">
+                    <Icon
+                      size={22}
+                      className="text-[#d4ae32] sm:h-[25px] sm:w-[25px]"
+                    />
                   </div>
 
-                  <h4 className="mt-5 text-lg font-bold text-white">
+                  <h4 className="mt-4 text-base font-bold text-white sm:mt-5 sm:text-lg">
                     {item.title}
                   </h4>
 
-                  <p className="mt-3 text-sm leading-7 text-[#8f9097]">
+                  <p className="mt-2 text-xs leading-6 text-[#8f9097] sm:mt-3 sm:text-sm sm:leading-7">
                     {item.text}
                   </p>
                 </motion.div>
