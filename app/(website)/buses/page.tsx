@@ -59,8 +59,8 @@ const vipBusImages = [
 ];
 
 // رقم واتساب موحّد يُستخدم في كل الصفحة
-const WHATSAPP_NUMBER = "966507634181";
-const PHONE_NUMBER_DISPLAY = "0507634181";
+const WHATSAPP_NUMBER = "966563591198";
+const PHONE_NUMBER_DISPLAY = "0563591198";
 
 // مكون عرض الصور مع كاروسيل
 function ImageGallery({
