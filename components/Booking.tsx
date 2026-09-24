@@ -47,15 +47,15 @@ export default function BookingSection(): JSX.Element {
     const message = `
 طلب حجز عمرة جديد 🕋
 
-الاسم: ${formData.name}
+الاسم: ${formData.name || "لم يحدد"}
 
-الجوال: ${formData.phone}
+الجوال: ${formData.phone || "لم يحدد"}
 
-عدد المعتمرين: ${formData.pilgrims}
+عدد المعتمرين: ${formData.pilgrims || "لم يحدد"}
 
-عدد المقاعد في الباص: ${formData.seats}
+عدد المقاعد في الباص: ${formData.seats || "لم يحدد"}
 
-التاريخ المفضل: ${formData.date}
+التاريخ المفضل: ${formData.date || "لم يحدد"}
 
 ملاحظات:
 ${formData.notes || "لا توجد ملاحظات"}
@@ -74,21 +74,14 @@ ${formData.notes || "لا توجد ملاحظات"}
       dir="rtl"
       className="relative overflow-hidden bg-[#F8F6F1] py-20 md:py-28"
     >
-      {/* ================================================= */}
-      {/* ================= BACKGROUND ==================== */}
-      {/* ================================================= */}
-
+      {/* ================= BACKGROUND ================= */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute right-[-120px] top-[-100px] h-[400px] w-[400px] rounded-full bg-[#D4AF37]/[0.06] blur-[120px]" />
-
         <div className="absolute bottom-[-150px] left-[-120px] h-[400px] w-[400px] rounded-full bg-[#096B50]/[0.06] blur-[120px]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        {/* ================================================= */}
-        {/* ===================== HEADER ==================== */}
-        {/* ================================================= */}
-
+        {/* ================= HEADER ================= */}
         <motion.div
           initial={{
             opacity: 0,
@@ -121,10 +114,7 @@ ${formData.notes || "لا توجد ملاحظات"}
           </p>
         </motion.div>
 
-        {/* ================================================= */}
-        {/* ================= MAIN CONTENT ================== */}
-        {/* ================================================= */}
-
+        {/* ================= MAIN CONTENT ================= */}
         <motion.div
           initial={{
             opacity: 0,
@@ -143,16 +133,9 @@ ${formData.notes || "لا توجد ملاحظات"}
           }}
           className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-10"
         >
-          {/* ================================================= */}
-          {/* ================= INFO CARD ===================== */}
-          {/* ================================================= */}
-
+          {/* ================= INFO CARD ================= */}
           <div className="relative overflow-hidden bg-[#202126] p-7 text-white shadow-[0_20px_60px_rgba(32,33,38,0.14)] md:p-10">
-            {/* Golden line */}
-
             <div className="absolute right-0 left-0 top-0 h-[2px] bg-gradient-to-l from-transparent via-[#D4AF37] to-transparent" />
-
-            {/* Glow */}
 
             <div className="pointer-events-none absolute right-[-100px] top-[-100px] h-[280px] w-[280px] rounded-full bg-[#D4AF37]/10 blur-[90px]" />
 
@@ -168,10 +151,8 @@ ${formData.notes || "لا توجد ملاحظات"}
               <div className="mt-5 h-[2px] w-14 bg-[#D4AF37]" />
 
               {/* Features */}
-
               <div className="mt-9 space-y-7">
                 {/* Bus */}
-
                 <div className="flex gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]">
                     <Bus size={21} />
@@ -187,7 +168,6 @@ ${formData.notes || "لا توجد ملاحظات"}
                 </div>
 
                 {/* Hotel */}
-
                 <div className="flex gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]">
                     <BedDouble size={21} />
@@ -203,7 +183,6 @@ ${formData.notes || "لا توجد ملاحظات"}
                 </div>
 
                 {/* Calendar */}
-
                 <div className="flex gap-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-[#D4AF37]/30 bg-[#D4AF37]/10 text-[#D4AF37]">
                     <CalendarDays size={21} />
@@ -220,7 +199,6 @@ ${formData.notes || "لا توجد ملاحظات"}
               </div>
 
               {/* Note */}
-
               <div className="mt-10 border border-[#096B50]/40 bg-[#096B50]/10 p-5">
                 <div className="flex gap-3">
                   <ShieldCheck
@@ -237,10 +215,7 @@ ${formData.notes || "لا توجد ملاحظات"}
             </div>
           </div>
 
-          {/* ================================================= */}
-          {/* ===================== FORM ====================== */}
-          {/* ================================================= */}
-
+          {/* ================= FORM ================= */}
           <form
             onSubmit={handleSubmit}
             className="border border-[#E4DFD5] bg-white p-6 shadow-[0_15px_50px_rgba(32,33,38,0.07)] md:p-9 lg:p-10"
@@ -251,17 +226,16 @@ ${formData.notes || "لا توجد ملاحظات"}
               </h3>
 
               <p className="mt-2 text-sm text-[#77787D]">
-                أدخل بياناتك وسنتواصل معك عبر واتساب.
+                جميع الخانات اختيارية، أدخل البيانات المتاحة لديك وسنتواصل معك
+                عبر واتساب.
               </p>
 
               <div className="mt-4 h-[2px] w-12 bg-[#D4AF37]" />
             </div>
 
             {/* ================= ROW 1 ================= */}
-
             <div className="grid gap-5 md:grid-cols-2">
               {/* الاسم */}
-
               <div>
                 <label
                   htmlFor="booking-name"
@@ -278,34 +252,16 @@ ${formData.notes || "لا توجد ملاحظات"}
 
                   <input
                     id="booking-name"
-                    required
                     type="text"
                     placeholder="اكتب اسمك بالكامل"
                     value={formData.name}
                     onChange={(e) => handleChange("name", e.target.value)}
-                    className="
-                      w-full
-                      border
-                      border-[#E2DED6]
-                      bg-[#FCFBF8]
-                      py-3.5
-                      pr-12
-                      pl-4
-                      text-sm
-                      text-[#202126]
-                      outline-none
-                      transition
-                      placeholder:text-[#A0A0A4]
-                      focus:border-[#096B50]
-                      focus:ring-2
-                      focus:ring-[#096B50]/10
-                    "
+                    className="w-full border border-[#E2DED6] bg-[#FCFBF8] py-3.5 pr-12 pl-4 text-sm text-[#202126] outline-none transition placeholder:text-[#A0A0A4] focus:border-[#096B50] focus:ring-2 focus:ring-[#096B50]/10"
                   />
                 </div>
               </div>
 
               {/* الجوال */}
-
               <div>
                 <label
                   htmlFor="booking-phone"
@@ -322,39 +278,20 @@ ${formData.notes || "لا توجد ملاحظات"}
 
                   <input
                     id="booking-phone"
-                    required
                     dir="ltr"
                     type="tel"
                     placeholder="+966 5xxxxxxxx"
                     value={formData.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
-                    className="
-                      w-full
-                      border
-                      border-[#E2DED6]
-                      bg-[#FCFBF8]
-                      py-3.5
-                      pr-12
-                      pl-4
-                      text-sm
-                      text-[#202126]
-                      outline-none
-                      transition
-                      placeholder:text-[#A0A0A4]
-                      focus:border-[#096B50]
-                      focus:ring-2
-                      focus:ring-[#096B50]/10
-                    "
+                    className="w-full border border-[#E2DED6] bg-[#FCFBF8] py-3.5 pr-12 pl-4 text-sm text-[#202126] outline-none transition placeholder:text-[#A0A0A4] focus:border-[#096B50] focus:ring-2 focus:ring-[#096B50]/10"
                   />
                 </div>
               </div>
             </div>
 
             {/* ================= ROW 2 ================= */}
-
             <div className="mt-5 grid gap-5 md:grid-cols-2">
               {/* عدد المعتمرين */}
-
               <div>
                 <label
                   htmlFor="booking-pilgrims"
@@ -371,34 +308,17 @@ ${formData.notes || "لا توجد ملاحظات"}
 
                   <input
                     id="booking-pilgrims"
-                    required
                     min="1"
                     type="number"
                     placeholder="عدد الأشخاص"
                     value={formData.pilgrims}
                     onChange={(e) => handleChange("pilgrims", e.target.value)}
-                    className="
-                      w-full
-                      border
-                      border-[#E2DED6]
-                      bg-[#FCFBF8]
-                      py-3.5
-                      pr-12
-                      pl-4
-                      text-sm
-                      text-[#202126]
-                      outline-none
-                      transition
-                      focus:border-[#096B50]
-                      focus:ring-2
-                      focus:ring-[#096B50]/10
-                    "
+                    className="w-full border border-[#E2DED6] bg-[#FCFBF8] py-3.5 pr-12 pl-4 text-sm text-[#202126] outline-none transition focus:border-[#096B50] focus:ring-2 focus:ring-[#096B50]/10"
                   />
                 </div>
               </div>
 
               {/* المقاعد */}
-
               <div>
                 <label
                   htmlFor="booking-seats"
@@ -415,35 +335,18 @@ ${formData.notes || "لا توجد ملاحظات"}
 
                   <input
                     id="booking-seats"
-                    required
                     min="1"
                     type="number"
                     placeholder="عدد المقاعد"
                     value={formData.seats}
                     onChange={(e) => handleChange("seats", e.target.value)}
-                    className="
-                      w-full
-                      border
-                      border-[#E2DED6]
-                      bg-[#FCFBF8]
-                      py-3.5
-                      pr-12
-                      pl-4
-                      text-sm
-                      text-[#202126]
-                      outline-none
-                      transition
-                      focus:border-[#096B50]
-                      focus:ring-2
-                      focus:ring-[#096B50]/10
-                    "
+                    className="w-full border border-[#E2DED6] bg-[#FCFBF8] py-3.5 pr-12 pl-4 text-sm text-[#202126] outline-none transition focus:border-[#096B50] focus:ring-2 focus:ring-[#096B50]/10"
                   />
                 </div>
               </div>
             </div>
 
             {/* ================= DATE ================= */}
-
             <div className="mt-5">
               <label
                 htmlFor="booking-date"
@@ -460,32 +363,15 @@ ${formData.notes || "لا توجد ملاحظات"}
 
                 <input
                   id="booking-date"
-                  required
                   type="date"
                   value={formData.date}
                   onChange={(e) => handleChange("date", e.target.value)}
-                  className="
-                    w-full
-                    border
-                    border-[#E2DED6]
-                    bg-[#FCFBF8]
-                    py-3.5
-                    pr-12
-                    pl-4
-                    text-sm
-                    text-[#202126]
-                    outline-none
-                    transition
-                    focus:border-[#096B50]
-                    focus:ring-2
-                    focus:ring-[#096B50]/10
-                  "
+                  className="w-full border border-[#E2DED6] bg-[#FCFBF8] py-3.5 pr-12 pl-4 text-sm text-[#202126] outline-none transition focus:border-[#096B50] focus:ring-2 focus:ring-[#096B50]/10"
                 />
               </div>
             </div>
 
             {/* ================= NOTES ================= */}
-
             <div className="mt-5">
               <label
                 htmlFor="booking-notes"
@@ -500,57 +386,22 @@ ${formData.notes || "لا توجد ملاحظات"}
                 placeholder="اكتب أي تفاصيل أو طلبات إضافية..."
                 value={formData.notes}
                 onChange={(e) => handleChange("notes", e.target.value)}
-                className="
-                  w-full
-                  resize-none
-                  border
-                  border-[#E2DED6]
-                  bg-[#FCFBF8]
-                  px-4
-                  py-3.5
-                  text-sm
-                  text-[#202126]
-                  outline-none
-                  transition
-                  placeholder:text-[#A0A0A4]
-                  focus:border-[#096B50]
-                  focus:ring-2
-                  focus:ring-[#096B50]/10
-                "
+                className="w-full resize-none border border-[#E2DED6] bg-[#FCFBF8] px-4 py-3.5 text-sm text-[#202126] outline-none transition placeholder:text-[#A0A0A4] focus:border-[#096B50] focus:ring-2 focus:ring-[#096B50]/10"
               />
             </div>
 
             {/* ================= SUBMIT ================= */}
-
             <button
               type="submit"
-              className="
-                mt-7
-                flex
-                w-full
-                items-center
-                justify-center
-                gap-2
-                bg-[#096B50]
-                px-6
-                py-4
-                text-base
-                font-black
-                text-white
-                shadow-[0_10px_30px_rgba(9,107,80,0.16)]
-                transition-all
-                duration-300
-                hover:-translate-y-0.5
-                hover:bg-[#075B44]
-                active:translate-y-0
-              "
+              className="mt-7 flex w-full items-center justify-center gap-2 bg-[#096B50] px-6 py-4 text-base font-black text-white shadow-[0_10px_30px_rgba(9,107,80,0.16)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#075B44] active:translate-y-0"
             >
               إرسال طلب الحجز
               <Send size={19} />
             </button>
 
             <p className="mt-4 text-center text-xs text-[#8A8A8E]">
-              سيتم فتح واتساب لإرسال بيانات الحجز إلى فريقنا.
+              جميع البيانات اختيارية، وسيتم فتح واتساب لإرسال طلب الحجز إلى
+              فريقنا.
             </p>
           </form>
         </motion.div>

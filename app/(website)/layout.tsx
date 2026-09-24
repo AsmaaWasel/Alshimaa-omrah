@@ -1,5 +1,6 @@
 import Navbar from "@/components/navbar";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import CallButton from "@/components/CallButton";
 
 export default function WebsiteLayout({
   children,
@@ -12,6 +13,7 @@ export default function WebsiteLayout({
 
       <main>{children}</main>
 
+      <CallButton />
       <WhatsAppButton />
     </>
   );

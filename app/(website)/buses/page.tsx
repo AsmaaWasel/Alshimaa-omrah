@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import {
@@ -9,7 +9,6 @@ import {
   Clock,
   CalendarDays,
   Users,
-  User,
   ArrowLeft,
   MessageCircle,
   Phone,
@@ -58,11 +57,14 @@ const vipBusImages = [
   "/vip-buses/bus8.jpeg",
 ];
 
-// رقم واتساب موحّد يُستخدم في كل الصفحة
+// رقم واتساب موحّد
 const WHATSAPP_NUMBER = "966563591198";
 const PHONE_NUMBER_DISPLAY = "0563591198";
 
-// مكون عرض الصور مع كاروسيل
+// =====================================================
+// Image Gallery
+// =====================================================
+
 function ImageGallery({
   images,
   title,
@@ -75,20 +77,11 @@ function ImageGallery({
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-    scrollToIndex((currentIndex + 1) % images.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-    scrollToIndex((currentIndex - 1 + images.length) % images.length);
-  };
-
   const scrollToIndex = (index: number) => {
     if (containerRef.current) {
       const container = containerRef.current;
       const items = container.querySelectorAll(".gallery-item");
+
       if (items[index]) {
         items[index].scrollIntoView({
           behavior: "smooth",
@@ -99,12 +92,24 @@ function ImageGallery({
     }
   };
 
+  const nextSlide = () => {
+    const nextIndex = (currentIndex + 1) % images.length;
+    setCurrentIndex(nextIndex);
+    scrollToIndex(nextIndex);
+  };
+
+  const prevSlide = () => {
+    const prevIndex = (currentIndex - 1 + images.length) % images.length;
+    setCurrentIndex(prevIndex);
+    scrollToIndex(prevIndex);
+  };
+
   const isAtStart = currentIndex === 0;
   const isAtEnd = currentIndex >= images.length - 1;
 
   return (
     <div className="relative">
-      <div className="block md:hidden text-center text-[10px] text-ink/30 mb-3">
+      <div className="block md:hidden text-center text-[11px] font-medium text-slate-500 mb-3">
         ← اسحب للتمرير →
       </div>
 
@@ -121,10 +126,14 @@ function ImageGallery({
               className="h-full w-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
               style={{ backgroundImage: `url('${src}')` }}
             />
+
             <div className="absolute inset-0 bg-gradient-to-t from-night/50 via-transparent to-transparent" />
+
             <div className="absolute bottom-3 right-3 md:bottom-4 md:right-5">
               <span
-                className={`rounded-full ${badgeColor === "gold" ? "bg-gold/90" : "bg-amber-500/90"} px-2.5 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-semibold text-white backdrop-blur-md`}
+                className={`rounded-full ${
+                  badgeColor === "gold" ? "bg-gold/90" : "bg-amber-500/90"
+                } px-2.5 py-1 md:px-4 md:py-1.5 text-[10px] md:text-xs font-semibold text-white backdrop-blur-md`}
               >
                 {title}
               </span>
@@ -145,6 +154,7 @@ function ImageGallery({
       >
         <ChevronLeft size={18} className="md:w-5 md:h-5" />
       </button>
+
       <button
         onClick={nextSlide}
         disabled={isAtEnd}
@@ -176,19 +186,24 @@ function ImageGallery({
         ))}
       </div>
 
-      <div className="mt-2 text-center text-[10px] text-ink/30">
+      <div className="mt-2 text-center text-[11px] font-medium text-slate-500">
         {currentIndex + 1} / {images.length}
       </div>
     </div>
   );
 }
 
+// =====================================================
+// Main Page
+// =====================================================
+
 export default function BusOnlyPage() {
   const [step, setStep] = useState(1);
-  const [selectedPackage, setSelectedPackage] = useState("bus-only");
+
   const [tripType, setTripType] = useState<
     "round" | "to-makkah" | "from-makkah"
   >("round");
+
   const [passengers, setPassengers] = useState(2);
   const [date, setDate] = useState("");
   const [name, setName] = useState("");
@@ -226,17 +241,25 @@ export default function BusOnlyPage() {
     const message = `السلام عليكم، أرغب في حجز مقعد باص فقط:
 
 📋 تفاصيل الحجز:
+
 • الباقة: حجز مقاعد باص فقط (بدون سكن)
+
 • نوع الرحلة: ${tripTypeText}
+
 • عدد المقاعد: ${passengers}
+
 • التاريخ المفضل: ${date || "لم يحدد"}
 
 👤 بيانات العميل:
+
 • الاسم: ${name || "لم يحدد"}
+
 • الجوال: ${phone || "لم يحدد"}
+
 • ملاحظات: ${notes || "لا يوجد"}`;
 
     const encodedMessage = encodeURIComponent(message);
+
     window.open(
       `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`,
       "_blank",
@@ -245,20 +268,26 @@ export default function BusOnlyPage() {
 
   return (
     <div className="min-h-screen bg-ivory">
-      {/* Hero Section */}
+      {/* =====================================================
+          Hero Section
+      ===================================================== */}
+
       <section className="relative overflow-hidden py-16 md:py-24 bg-gradient-to-br from-primary via-primary/90 to-primary/80">
         <div className="absolute inset-0 opacity-10 pl-4">
           <div
             className="h-full w-full bg-cover bg-center"
-            style={{ backgroundImage: "url('/images/makkah-bg.jpg')" }}
+            style={{
+              backgroundImage: "url('/images/makkah-bg.jpg')",
+            }}
           />
         </div>
+
         <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-900/80 to-emerald-800/60" />
 
         <div className="container pr-4 md:pr-8 relative z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-primary-foreground hover:text-emerald-200 transition-colors mb-8"
+            className="inline-flex items-center gap-2 text-white hover:text-emerald-200 transition-colors mb-8"
           >
             <ArrowLeft size={18} />
             العودة للرئيسية
@@ -268,16 +297,20 @@ export default function BusOnlyPage() {
             <span className="inline-block rounded-full bg-white/10 border border-white/20 backdrop-blur px-4 py-1.5 text-xs font-semibold text-emerald-200 mb-5">
               دون سكن — مرونة كاملة
             </span>
+
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
               باصات قافلة الشيماء
             </h1>
+
             <h2 className="text-2xl md:text-3xl font-bold text-emerald-300 mt-3">
               رحلات يومية للعمرة والزيارة
             </h2>
-            <p className="mt-5 text-emerald-100/80 text-base md:text-lg max-w-xl leading-relaxed">
+
+            <p className="mt-5 text-white text-base md:text-lg max-w-xl leading-relaxed">
               توفر قافلة الشيماء رحلات عمرة يومية من الرياض بباصات حديثة ومريحة،
               مع خيارات اقتصادية وVIP لتناسب جميع المعتمرين والزوار.
             </p>
+
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="#booking"
@@ -291,25 +324,33 @@ export default function BusOnlyPage() {
         </div>
       </section>
 
-      {/* Breadcrumb */}
-      <section className="py-4 md:py-5 bg-white/80 border-b border-ink/5">
+      {/* =====================================================
+          Breadcrumb
+      ===================================================== */}
+
+      <section className="py-4 md:py-5 bg-white border-b border-slate-200">
         <div className="container pr-4 md:pr-8">
-          <div className="flex items-center gap-2 text-sm text-ink/50">
-            <Link href="/" className="hover:text-gold-dark">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <Link href="/" className="hover:text-emerald-700 transition-colors">
               الرئيسية
             </Link>
-            <span>‹</span>
-            <span className="text-emerald-600 font-semibold">
+
+            <span className="text-slate-400">‹</span>
+
+            <span className="text-emerald-700 font-semibold">
               باصات العمرة من الرياض إلى مكة
             </span>
           </div>
         </div>
       </section>
 
-      {/* Trip Options */}
+      {/* =====================================================
+          Trip Options
+      ===================================================== */}
+
       <section className="py-14 md:py-20">
         <div className="container pr-4 md:pr-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-night mb-10 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-10 text-center">
             خيارات حجز مقاعد الباص
           </h2>
 
@@ -317,6 +358,7 @@ export default function BusOnlyPage() {
             {tripOptions.map((option) => {
               const Icon = option.icon;
               const isSelected = tripType === option.id;
+
               return (
                 <button
                   key={option.id}
@@ -324,7 +366,7 @@ export default function BusOnlyPage() {
                   className={`flex h-full flex-col rounded-2xl p-6 text-right transition-all duration-300 ${
                     isSelected
                       ? "border-2 border-emerald-500 bg-emerald-50 shadow-lg shadow-emerald-100"
-                      : "border-2 border-ink/10 bg-white hover:border-emerald-200"
+                      : "border-2 border-slate-200 bg-white hover:border-emerald-200"
                   }`}
                 >
                   <div
@@ -336,17 +378,22 @@ export default function BusOnlyPage() {
                   >
                     <Icon size={28} />
                   </div>
-                  <h3 className="text-lg font-bold text-night">
+
+                  <h3 className="text-lg font-bold text-slate-900">
                     {option.title}
                   </h3>
-                  <p className="text-sm text-ink/60 mt-2 leading-relaxed grow">
+
+                  <p className="text-sm text-slate-700 mt-2 leading-relaxed grow">
                     {option.description}
                   </p>
+
                   <div className="mt-4 flex items-center gap-2 text-xs h-4">
                     {isSelected && (
                       <>
                         <CheckCircle2 size={14} className="text-emerald-600" />
-                        <span className="text-emerald-600">محدد</span>
+                        <span className="text-emerald-700 font-semibold">
+                          محدد
+                        </span>
                       </>
                     )}
                   </div>
@@ -357,42 +404,55 @@ export default function BusOnlyPage() {
         </div>
       </section>
 
-      {/* Fleet Section */}
+      {/* =====================================================
+          Fleet Section
+      ===================================================== */}
+
       <section className="py-14 md:py-20 bg-white">
         <div className="container pr-4 md:pr-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-night mb-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4 text-center">
             أسطولنا — باصات حديثة موديل 2027
           </h2>
-          <p className="text-center text-ink/60 mb-12 max-w-2xl mx-auto leading-relaxed">
+
+          <p className="text-center text-slate-700 mb-12 max-w-2xl mx-auto leading-relaxed">
             جميع باصاتنا حديثة وراقية ومريحة، بصيانة دورية وسائقين محترفين على
             طريق الرياض — مكة.
           </p>
 
           <div className="grid gap-6 md:gap-8 md:grid-cols-2 items-stretch">
             {/* Economy Bus */}
+
             <div className="flex flex-col rounded-2xl border border-primary/20 bg-gradient-to-br from-white to-emerald-50/30 p-6 md:p-8 shadow-soft">
               <div className="flex items-center gap-3 mb-5">
                 <div className="rounded-xl bg-emerald-100 p-2 text-emerald-600">
                   <Bus size={24} />
                 </div>
+
                 <div>
-                  <h3 className="text-xl font-bold text-night">
+                  <h3 className="text-xl font-bold text-slate-900">
                     الباص الاقتصادي
                   </h3>
-                  <p className="text-sm text-ink/60">راحة ممتازة بسعر مناسب</p>
+
+                  <p className="text-sm text-slate-600">
+                    راحة ممتازة بسعر مناسب
+                  </p>
                 </div>
               </div>
-              <ul className="space-y-3.5">
+
+              <ul className="space-y-3.5 text-slate-800">
                 <li className="flex items-center gap-3 text-sm">
                   <Users size={16} className="text-primary shrink-0" />
                   <span>
-                    <strong>49 مقعداً</strong> — 4 صفوف مقاعد مريحة
+                    <strong className="text-slate-900">49 مقعداً</strong> — 4
+                    صفوف مقاعد مريحة
                   </span>
                 </li>
+
                 <li className="flex items-center gap-3 text-sm">
                   <CalendarDays size={16} className="text-primary shrink-0" />
                   <span>موديل 2027 حديث ومكيف</span>
                 </li>
+
                 <li className="flex items-center gap-3 text-sm">
                   <Clock size={16} className="text-primary shrink-0" />
                   <span>رحلات شبه يومية</span>
@@ -401,30 +461,38 @@ export default function BusOnlyPage() {
             </div>
 
             {/* VIP Bus */}
+
             <div className="flex flex-col rounded-2xl border border-amber-100 bg-gradient-to-br from-white to-amber-50/30 p-6 md:p-8 shadow-soft">
               <div className="flex items-center gap-3 mb-5">
                 <div className="rounded-xl bg-amber-100 p-2 text-amber-600">
                   <Crown size={24} />
                 </div>
+
                 <div>
-                  <h3 className="text-xl font-bold text-night">
+                  <h3 className="text-xl font-bold text-slate-900">
                     باص VIP الفاخر
                   </h3>
-                  <p className="text-sm text-ink/60">مساحة أوسع وتجربة أرقى</p>
+
+                  <p className="text-sm text-slate-600">
+                    مساحة أوسع وتجربة أرقى
+                  </p>
                 </div>
               </div>
-              <ul className="space-y-3.5">
+
+              <ul className="space-y-3.5 text-slate-800">
                 <li className="flex items-center gap-3 text-sm">
                   <Users size={16} className="text-amber-500 shrink-0" />
                   <span>
-                    <strong>30 مقعداً</strong> — 3 صفوف فاخرة بمساحة أكبر
-                    للقدمين
+                    <strong className="text-slate-900">30 مقعداً</strong> — 3
+                    صفوف فاخرة بمساحة أكبر للقدمين
                   </span>
                 </li>
+
                 <li className="flex items-center gap-3 text-sm">
                   <UsersRound size={16} className="text-amber-500 shrink-0" />
                   <span>عدد ركاب محدود لهدوء أكثر</span>
                 </li>
+
                 <li className="flex items-center gap-3 text-sm">
                   <CalendarDays size={16} className="text-amber-500 shrink-0" />
                   <span>انطلاق كل اثنين وخميس</span>
@@ -433,25 +501,31 @@ export default function BusOnlyPage() {
             </div>
           </div>
 
-          <div className="mt-8 rounded-2xl bg-amber-50/50 p-4 md:p-5 border border-amber-200">
+          <div className="mt-8 rounded-2xl bg-amber-50 p-4 md:p-5 border border-amber-200">
             <div className="flex items-start gap-3">
-              <Info size={20} className="text-amber-500 shrink-0 mt-0.5" />
-              <p className="text-sm text-ink/70 leading-relaxed">
-                <strong>ملاحظة:</strong> الباصات لا توفر خدمة واي فاي ولا
-                تُقدَّم وجبات خلال الرحلة — ننصح بتجهيز احتياجاتك قبل الانطلاق.
+              <Info size={20} className="text-amber-600 shrink-0 mt-0.5" />
+
+              <p className="text-sm text-slate-700 leading-relaxed">
+                <strong className="text-slate-900">ملاحظة:</strong> الباصات لا
+                توفر خدمة واي فاي ولا تُقدَّم وجبات خلال الرحلة — ننصح بتجهيز
+                احتياجاتك قبل الانطلاق.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Who Is This For */}
+      {/* =====================================================
+          Who Is This For
+      ===================================================== */}
+
       <section className="py-14 md:py-20">
         <div className="container pr-4 md:pr-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-night mb-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4 text-center">
             يناسبك إذا كنت — حجز الباص فقط، لمن؟
           </h2>
-          <p className="text-center text-ink/60 mb-12">
+
+          <p className="text-center text-slate-700 mb-12">
             خيار مثالي لمن يبحث عن المرونة الكاملة في رحلة العمرة
           </p>
 
@@ -464,10 +538,11 @@ export default function BusOnlyPage() {
             ].map((text, index) => (
               <div
                 key={index}
-                className="flex items-center gap-3 bg-white rounded-xl p-4 shadow-soft border border-ink/5"
+                className="flex items-center gap-3 bg-white rounded-xl p-4 shadow-soft border border-slate-200"
               >
                 <CheckCircle2 size={20} className="text-primary shrink-0" />
-                <span className="text-sm text-night/80 leading-relaxed">
+
+                <span className="text-sm text-slate-800 leading-relaxed">
                   {text}
                 </span>
               </div>
@@ -475,18 +550,18 @@ export default function BusOnlyPage() {
           </div>
 
           <div className="mt-10 text-center">
-            <p className="text-sm text-ink/60">
+            <p className="text-sm text-slate-700">
               تبحث عن رحلة متكاملة بالسكن؟ اطلع على{" "}
               <Link
                 href="/economy"
-                className="text-emerald-600 font-semibold hover:underline"
+                className="text-emerald-700 font-semibold hover:underline"
               >
                 الباقة الاقتصادية
-              </Link>
+              </Link>{" "}
               {" أو "}
               <Link
                 href="/vip"
-                className="text-amber-600 font-semibold hover:underline"
+                className="text-amber-700 font-semibold hover:underline"
               >
                 باقة VIP
               </Link>
@@ -496,15 +571,20 @@ export default function BusOnlyPage() {
         </div>
       </section>
 
-      {/* Economy Bus Gallery */}
+      {/* =====================================================
+          Economy Bus Gallery
+      ===================================================== */}
+
       <section className="py-14 md:py-20 bg-white">
         <div className="container pr-4 md:pr-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-night mb-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4 text-center">
             معرض الصور — الباص الاقتصادي (49 مقعداً)
           </h2>
-          <p className="text-center text-ink/60 mb-10 max-w-2xl mx-auto leading-relaxed">
+
+          <p className="text-center text-slate-700 mb-10 max-w-2xl mx-auto leading-relaxed">
             باصات حديثة موديل 2027 بـ4 صفوف — رحلات شبه يومية بسعر مناسب
           </p>
+
           <ImageGallery
             images={economyBusImages}
             title="الباص الاقتصادي — 49 مقعداً"
@@ -525,15 +605,20 @@ export default function BusOnlyPage() {
         </div>
       </section>
 
-      {/* VIP Bus Gallery */}
+      {/* =====================================================
+          VIP Bus Gallery
+      ===================================================== */}
+
       <section className="py-14 md:py-20">
         <div className="container pr-4 md:pr-8">
-          <h2 className="text-2xl md:text-3xl font-extrabold text-night mb-4 text-center">
+          <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4 text-center">
             معرض الصور — باص VIP الفاخر (30 مقعداً)
           </h2>
-          <p className="text-center text-ink/60 mb-10 max-w-2xl mx-auto leading-relaxed">
+
+          <p className="text-center text-slate-700 mb-10 max-w-2xl mx-auto leading-relaxed">
             3 صفوف فاخرة فقط — مساحة أوسع وخصوصية أكثر كل اثنين وخميس
           </p>
+
           <ImageGallery
             images={vipBusImages}
             title="باص VIP الفاخر — 30 مقعداً"
@@ -554,42 +639,53 @@ export default function BusOnlyPage() {
         </div>
       </section>
 
-      {/* Booking Section */}
+      {/* =====================================================
+          Booking Section
+      ===================================================== */}
+
       <section id="booking" className="py-14 md:py-20 bg-white">
         <div className="container pr-4 md:pr-8">
           <div className="text-center mb-10">
-            <div className="inline-block rounded-full bg-emerald-100 px-4 py-1.5 text-xs font-semibold text-primary mb-4">
+            <div className="inline-flex items-center rounded-full bg-emerald-100 px-4 py-1.5 text-xs font-semibold text-emerald-800 mb-4">
               <Clock size={14} className="inline ml-1" />
               احجز في أقل من دقيقة
             </div>
-            <h2 className="text-2xl md:text-3xl font-extrabold text-night">
+
+            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900">
               احجز مقعدك بخطوات بسيطة
             </h2>
-            <p className="text-ink/60 mt-3 max-w-2xl mx-auto leading-relaxed">
+
+            <p className="text-slate-700 mt-3 max-w-2xl mx-auto leading-relaxed">
               اختر نوع رحلتك وحدد التفاصيل، وسيتم تجهيز رسالة واتساب كاملة —
               أرسلها وسيؤكد لك فريقنا التوفر والسعر مباشرة.
             </p>
           </div>
 
           {/* Features Bar */}
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 rounded-2xl bg-emerald-50/50 p-5 mb-10 max-w-3xl mx-auto">
-            <div className="flex items-center gap-2 text-sm text-ink/70">
+
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 rounded-2xl bg-emerald-50 p-5 mb-10 max-w-3xl mx-auto">
+            <div className="flex items-center gap-2 text-sm text-slate-700">
               <ShieldCheck size={18} className="text-primary shrink-0" />
               <span>بدون دفع إلكتروني مسبق — التأكيد عبر واتساب</span>
             </div>
-            <div className="hidden h-6 w-px bg-ink/10 md:block" />
-            <div className="flex items-center gap-2 text-sm text-ink/70">
+
+            <div className="hidden h-6 w-px bg-slate-200 md:block" />
+
+            <div className="flex items-center gap-2 text-sm text-slate-700">
               <Clock size={18} className="text-primary shrink-0" />
               <span>رد سريع على مدار اليوم</span>
             </div>
-            <div className="hidden h-6 w-px bg-ink/10 md:block" />
-            <div className="flex items-center gap-2 text-sm text-ink/70">
+
+            <div className="hidden h-6 w-px bg-slate-200 md:block" />
+
+            <div className="flex items-center gap-2 text-sm text-slate-700">
               <Users size={18} className="text-primary shrink-0" />
               <span>مقاعد للأفراد والعائلات والمجموعات</span>
             </div>
           </div>
 
           {/* Steps */}
+
           <div className="flex items-center justify-center gap-2 md:gap-4 mb-3">
             {[1, 2, 3, 4].map((s) => (
               <div key={s} className="flex items-center">
@@ -598,22 +694,24 @@ export default function BusOnlyPage() {
                   className={`flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full text-xs md:text-sm font-bold transition-all duration-300 ${
                     step >= s
                       ? "bg-primary text-white shadow-emerald-200 shadow-lg"
-                      : "bg-white/50 text-ink/30 border border-ink/10"
+                      : "bg-white text-slate-600 border border-slate-300"
                   }`}
                 >
                   {s}
                 </button>
+
                 {s < 4 && (
                   <div
                     className={`h-0.5 w-6 md:w-12 transition-all duration-300 ${
-                      step > s ? "bg-primary" : "bg-ink/10"
+                      step > s ? "bg-primary" : "bg-slate-200"
                     }`}
                   />
                 )}
               </div>
             ))}
           </div>
-          <div className="flex justify-center gap-4 text-[10px] md:text-xs text-ink/50 mb-10">
+
+          <div className="flex justify-center gap-4 text-[10px] md:text-xs font-medium text-slate-600 mb-10">
             <span>نوع الباقة</span>
             <span>تفاصيل الرحلة</span>
             <span>بياناتك</span>
@@ -621,45 +719,60 @@ export default function BusOnlyPage() {
           </div>
 
           {/* Booking Form */}
+
           <div className="max-w-3xl mx-auto bg-ivory rounded-2xl shadow-soft p-6 md:p-8 border border-primary/20">
             <div className="space-y-6">
               {/* Package Selection */}
+
               <div className="max-w-xs mx-auto">
                 <div className="rounded-xl border-2 border-emerald-500 bg-emerald-50 p-4 text-center shadow-lg shadow-emerald-100">
                   <Bus size={24} className="mx-auto text-primary" />
-                  <p className="text-xs font-bold mt-1.5 text-primary">
+
+                  <p className="text-xs font-bold mt-1.5 text-emerald-800">
                     باص فقط
                   </p>
-                  <p className="text-[10px] text-primary/70">بدون سكن</p>
+
+                  <p className="text-[10px] font-medium text-slate-600">
+                    بدون سكن
+                  </p>
                 </div>
               </div>
 
-              {/* Trip Type Display */}
-              <div className="rounded-xl bg-emerald-50/50 p-4 border border-emerald-200">
-                <p className="text-sm text-ink/60">نوع الرحلة المختار</p>
-                <p className="font-bold text-night mt-0.5">
+              {/* Trip Type */}
+
+              <div className="rounded-xl bg-emerald-50 p-4 border border-emerald-200">
+                <p className="text-sm text-slate-600">نوع الرحلة المختار</p>
+
+                <p className="font-bold text-slate-900 mt-0.5">
                   {tripOptions.find((t) => t.id === tripType)?.title}
                 </p>
               </div>
 
+              {/* Passengers + Date */}
+
               <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <label className="block text-sm font-bold text-night mb-2">
+                  <label className="block text-sm font-bold text-slate-900 mb-2">
                     عدد المقاعد
                   </label>
-                  <div className="flex items-center gap-4 rounded-xl border-2 border-ink/10 p-2 bg-white">
+
+                  <div className="flex items-center gap-4 rounded-xl border-2 border-slate-200 p-2 bg-white">
                     <button
                       onClick={() => setPassengers(Math.max(1, passengers - 1))}
-                      className="p-2 hover:bg-ink/5 rounded-lg text-lg"
+                      className="p-2 hover:bg-slate-100 rounded-lg text-lg text-slate-800"
                     >
                       −
                     </button>
-                    <span className="text-xl font-bold">{passengers}</span>
+
+                    <span className="text-xl font-bold text-slate-900">
+                      {passengers}
+                    </span>
+
                     <button
                       onClick={() =>
                         setPassengers(Math.min(10, passengers + 1))
                       }
-                      className="p-2 hover:bg-ink/5 rounded-lg text-lg"
+                      className="p-2 hover:bg-slate-100 rounded-lg text-lg text-slate-800"
                     >
                       +
                     </button>
@@ -667,56 +780,68 @@ export default function BusOnlyPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-night mb-2">
+                  <label className="block text-sm font-bold text-slate-900 mb-2">
                     التاريخ المفضل
                   </label>
+
                   <input
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full rounded-xl border-2 border-ink/10 px-4 py-3 outline-none focus:border-emerald-400 bg-white"
+                    className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 outline-none focus:border-emerald-400 bg-white text-slate-900"
                   />
                 </div>
               </div>
 
+              {/* Name */}
+
               <div>
-                <label className="block text-sm font-bold text-night mb-2">
+                <label className="block text-sm font-bold text-slate-900 mb-2">
                   الاسم الكامل
                 </label>
+
                 <input
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="مثال: عبدالله محمد"
-                  className="w-full rounded-xl border-2 border-ink/10 px-4 py-3 outline-none focus:border-emerald-400 bg-white"
+                  className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 outline-none focus:border-emerald-400 bg-white text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
+              {/* Phone */}
+
               <div>
-                <label className="block text-sm font-bold text-night mb-2">
+                <label className="block text-sm font-bold text-slate-900 mb-2">
                   رقم الجوال
                 </label>
+
                 <input
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="05xxxxxxxx"
-                  className="w-full rounded-xl border-2 border-ink/10 px-4 py-3 outline-none focus:border-emerald-400 bg-white"
+                  className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 outline-none focus:border-emerald-400 bg-white text-slate-900 placeholder:text-slate-400"
                 />
               </div>
 
+              {/* Notes */}
+
               <div>
-                <label className="block text-sm font-bold text-night mb-2">
+                <label className="block text-sm font-bold text-slate-900 mb-2">
                   ملاحظات إضافية (اختياري)
                 </label>
+
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={2}
                   placeholder="أي تفاصيل إضافية..."
-                  className="w-full rounded-xl border-2 border-ink/10 px-4 py-3 outline-none focus:border-emerald-400 bg-white"
+                  className="w-full rounded-xl border-2 border-slate-200 px-4 py-3 outline-none focus:border-emerald-400 bg-white text-slate-900 placeholder:text-slate-400"
                 />
               </div>
+
+              {/* Submit */}
 
               <button
                 onClick={handleSubmit}
@@ -730,17 +855,23 @@ export default function BusOnlyPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* =====================================================
+          CTA Section
+      ===================================================== */}
+
       <section className="py-14 md:py-20 bg-gradient-to-l from-primary to-primary/80">
         <div className="container pr-4 md:pr-8 text-center">
           <div className="max-w-2xl mx-auto">
-            <Bus size={48} className="mx-auto text-white/80 mb-5" />
+            <Bus size={48} className="mx-auto text-white/90 mb-5" />
+
             <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-4">
               مقعدك في الباص جاهز
             </h2>
-            <p className="text-emerald-50/90 mb-8 leading-relaxed">
+
+            <p className="text-white/95 mb-8 leading-relaxed">
               أرسل لنا الاتجاه والتاريخ وعدد المقاعد وسنؤكد لك الحجز مباشرة.
             </p>
+
             <div className="flex flex-wrap justify-center gap-4">
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}`}
@@ -751,9 +882,10 @@ export default function BusOnlyPage() {
                 <MessageCircle size={18} />
                 احجز عبر واتساب
               </a>
+
               <a
                 href={`tel:+${WHATSAPP_NUMBER}`}
-                className="inline-flex items-center gap-2 rounded-full border-2 border-white/30 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/20"
+                className="inline-flex items-center gap-2 rounded-full border-2 border-white/70 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/20"
               >
                 <Phone size={18} />
                 {PHONE_NUMBER_DISPLAY}
