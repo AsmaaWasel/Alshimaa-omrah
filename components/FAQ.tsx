@@ -25,7 +25,7 @@ type FAQItem = {
 const faqs: FAQItem[] = [
   {
     id: 1,
-    question: "من أين تنطلق رحلات قافلة الشيماء؟",
+    question: "Where do Alshimaa trips depart from?",
     answer:
       "تنطلق رحلات العمرة من مدينة الرياض إلى مكة المكرمة عبر باصات سياحية حديثة مجهزة لتوفير الراحة والأمان طوال الطريق.",
     icon: MapPin,
@@ -95,7 +95,7 @@ export default function FAQ(): JSX.Element {
   return (
     <section
       id="faq"
-      dir="rtl"
+      dir="ltr"
       className="relative overflow-hidden bg-[#F8F6F1] py-20 md:py-28"
     >
       {/* ================================================= */}
@@ -134,13 +134,13 @@ export default function FAQ(): JSX.Element {
 
           <span className="inline-flex items-center gap-2 border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-5 py-2 text-xs font-bold text-[#9C7A16] md:text-sm">
             <MessageCircle size={16} />
-            أسئلة المعتمرين
+            Pilgrim questions
           </span>
 
           {/* Title */}
 
           <h2 className="mt-6 text-3xl font-black leading-relaxed text-[#202126] sm:text-4xl md:text-5xl">
-            الأسئلة <span className="text-[#096B50]">الشائعة</span>
+            Frequently asked <span className="text-[#096B50]">questions</span>
           </h2>
 
           {/* Description */}

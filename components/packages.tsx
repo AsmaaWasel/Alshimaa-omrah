@@ -14,7 +14,7 @@ import {
 
 const packages = [
   {
-    title: "الباقة الاقتصادية",
+    title: "Economy Package",
     description: "نقل باص شامل ومكيف",
     icon: Bus,
     badge: "الأكثر حجزًا",
@@ -137,7 +137,7 @@ export default function PackagesSection() {
   return (
     <section
       id="programs"
-      dir="rtl"
+      dir="ltr"
       className="bg-[#101117] py-14 text-white sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -149,11 +149,11 @@ export default function PackagesSection() {
           className="mx-auto mb-10 max-w-2xl text-center sm:mb-14"
         >
           <span className="inline-flex rounded-full border border-[#c9a227]/30 bg-[#c9a227]/10 px-4 py-1.5 text-xs font-semibold text-[#d8b63d]">
-            حملات العمرة
+            Umrah campaigns
           </span>
 
           <h2 className="mt-4 text-3xl font-black text-white sm:text-4xl md:text-5xl">
-            تصفح الباقات
+            Explore our packages
           </h2>
 
           <p className="mt-3 text-sm leading-7 text-[#aaaab0] sm:text-base">

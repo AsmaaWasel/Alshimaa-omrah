@@ -15,7 +15,7 @@ interface EconomyHotel {
 
 const economyHotels: EconomyHotel[] = [
   {
-    name: "فندق بارك رويال",
+    name: "Park Royal Hotel",
     description:
       "إقامة مريحة ومناسبة للمعتمرين مع خدمات متكاملة وأسعار مناسبة، لتوفير تجربة إقامة عملية ومريحة أثناء رحلة العمرة.",
     images: [
@@ -65,7 +65,7 @@ export default function EconomyServices(): JSX.Element {
   return (
     <section
       id="economy-services"
-      dir="rtl"
+      dir="ltr"
       className="relative overflow-hidden bg-[#101117] py-24 text-white"
     >
       {/* ================================================= */}
@@ -104,11 +104,11 @@ export default function EconomyServices(): JSX.Element {
         >
           <span className="inline-flex items-center gap-2 border border-[#096B50]/60 bg-[#096B50]/10 px-5 py-2 text-sm font-bold text-[#35B894] md:text-base">
             <Wallet size={17} />
-            الباقة الاقتصادية
+            Economy package
           </span>
 
           <h2 className="mt-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
-            إقامة مريحة بأسعار مناسبة
+            Comfortable stays at fair prices
           </h2>
 
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-9 text-[#aaaab0] md:text-xl">

@@ -46,7 +46,7 @@ export default function PricesSection(): JSX.Element {
   return (
     <section
       id="prices"
-      dir="rtl"
+      dir="ltr"
       className="relative overflow-hidden bg-[#F8F6F1] py-20 md:py-24"
     >
       {/* ================================================= */}

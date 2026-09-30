@@ -7,9 +7,9 @@ import { CheckCircle, Crown, Star, Bus } from "lucide-react";
 export default function PremiumServices() {
   const hotels = [
     {
-      name: "فندق فوكو",
+      name: "Voco Hotel",
       description:
-        "خدمات VIP راقية مع إقامة في فندق مميز قريب من الحرم، بالإضافة إلى خدمة نقل مجانية على مدار 24 ساعة من وإلى الحرم لتوفير أقصى درجات الراحة للمعتمرين والزوار.",
+        "Premium VIP service with a standout hotel near the Holy Mosque, plus complimentary 24-hour transfers for complete comfort.",
       images: [
         "/voco/i-love-voco.jpeg",
         "/voco/voco-gate.jpeg",
@@ -20,10 +20,10 @@ export default function PremiumServices() {
       ],
       video: "/voco/voco2.mp4",
       features: [
-        "فندق خمس نجوم",
-        "غرف فاخرة",
-        "مطاعم وبوفيه وكافيهات",
-        "مواقف سيارات",
+        "Five-star hotel",
+        "Luxury rooms",
+        "Restaurants, buffet and cafés",
+        "Parking available",
       ],
     },
 
@@ -78,7 +78,7 @@ export default function PremiumServices() {
   return (
     <section
       id="vip-services"
-      dir="rtl"
+      dir="ltr"
       className="relative overflow-hidden bg-[#101117] py-24 text-white"
     >
       {/* ================= BACKGROUND ================= */}
@@ -112,11 +112,11 @@ export default function PremiumServices() {
         >
           <span className="inline-flex items-center gap-2 rounded-full border border-[#c9a227]/40 bg-[#c9a227]/10 px-5 py-2 text-sm font-bold text-[#d8b63d] md:text-base">
             <Crown size={16} />
-            الإقامة الفاخرة
+            Luxury stays
           </span>
 
           <h2 className="mt-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
-            فنادق الخمس نجوم
+            Five-star hotels
           </h2>
 
           <p className="mx-auto mt-5 max-w-3xl text-lg leading-9 text-[#aaaab0] md:text-xl">
@@ -266,7 +266,7 @@ export default function PremiumServices() {
           >
             <span className="inline-flex items-center gap-2 rounded-full border border-[#17866c]/50 bg-[#17866c]/10 px-5 py-2 text-sm font-bold text-[#31b894] md:text-base">
               <Bus size={17} />
-              النقل المميز
+              Premium transport
             </span>
 
             <h2 className="mt-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">

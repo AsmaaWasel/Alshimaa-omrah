@@ -17,7 +17,7 @@ export default function Contact() {
     {
       icon: MessageCircle,
       title: "واتساب",
-      description: "تواصل معنا فوراً",
+      description: "Contact us فوراً",
       contact: "966563591198",
       link: "https://wa.me/966563591198",
     },
@@ -74,7 +74,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      dir="rtl"
+      dir="ltr"
       className="relative overflow-hidden bg-[#101117] py-20 text-white md:py-28"
     >
       {/* ================= BACKGROUND ================= */}
@@ -109,7 +109,7 @@ export default function Contact() {
         >
           <span className="inline-flex items-center gap-2 border border-[#D4AF37]/40 bg-[#D4AF37]/10 px-5 py-2 text-sm font-bold text-[#D4AF37]">
             <MessageCircle size={16} />
-            تواصل معنا
+            Contact us
           </span>
 
           <h2 className="mt-6 text-4xl font-black text-white md:text-5xl lg:text-6xl">
@@ -329,7 +329,7 @@ export default function Contact() {
             </h3>
 
             <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-[#aaaab0] md:text-lg">
-              لا تتردد في التواصل معنا، وسيساعدك فريقنا في اختيار الباقة والفندق
+              لا تتردد في الContact us، وسيساعدك فريقنا في اختيار الباقة والفندق
               وموعد الرحلة المناسب لك.
             </p>
 
