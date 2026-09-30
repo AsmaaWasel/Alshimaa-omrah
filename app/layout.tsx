@@ -1,9 +1,21 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import { Cairo, Amiri } from "next/font/google";
+
+const cairo = Cairo({
+  subsets: ["arabic", "latin"],
+  variable: "--font-arabic",
+});
+const amiri = Amiri({
+  subsets: ["arabic", "latin"],
+  weight: ["400", "700"],
+  variable: "--font-calligraphy",
+});
 
 export const metadata: Metadata = {
-  title: "قافلة الشيماء",
+  title: "قافلة الشيماء | رحلة مكة والعمرة",
+  description: "رحلات عمرة وإقامة مميزة من الرياض إلى مكة والمدينة.",
 };
 
 export default function RootLayout({
@@ -22,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-TMS76KV6');`}
         </Script>
       </head>
-      <body>
+      <body className={`${cairo.variable} ${amiri.variable}`}>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-TMS76KV6"
