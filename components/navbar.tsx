@@ -7,7 +7,6 @@ import { Menu, Moon, Sun, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { useSitePreferences } from "./site-preferences";
 
-
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { locale, isDark, toggleLocale, toggleTheme } = useSitePreferences();
@@ -72,13 +71,13 @@ export default function Navbar() {
           >
             {isArabic ? "EN" : "عربي"}
           </button>
-          <button
+          {/* <button
             aria-label={isDark ? "Light mode" : "Dark mode"}
             onClick={toggleTheme}
             className="rounded-full border border-border p-2 text-primary transition hover:bg-primary hover:text-primary-foreground"
           >
             {isDark ? <Sun className="size-4" /> : <Moon className="size-4" />}
-          </button>
+          </button> */}
           <a
             href="https://wa.me/966563591198"
             target="_blank"
